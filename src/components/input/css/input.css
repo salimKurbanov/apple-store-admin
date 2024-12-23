@@ -1,0 +1,37 @@
+@charset "UTF-8";
+/*-------------Миксины----------------*/
+.input_field .label {
+  white-space: nowrap;
+  text-transform: lowercase;
+  color: var(--white);
+  margin-bottom: 3.5px;
+}
+@media (max-width: 768px) {
+  .input_field .label {
+    font-size: calc(14px + 3.4 * (100vw - 320px) / 1920);
+  }
+}
+@media (min-width: 768px) {
+  .input_field .label {
+    font-size: calc(14px + 2 * 0.0520833333vw);
+  }
+}
+.input_field input {
+  padding: 10px 15px;
+  border-radius: 15px;
+  background-color: var(--grey);
+  color: var(--black);
+}
+@media (max-width: 768px) {
+  .input_field input {
+    font-size: calc(18px + 3.4 * (100vw - 320px) / 1920);
+  }
+}
+@media (min-width: 768px) {
+  .input_field input {
+    font-size: calc(18px + 2 * 0.0520833333vw);
+  }
+}
+.input_field.full input {
+  width: 100%;
+}/*# sourceMappingURL=input.css.map */

@@ -1,0 +1,45 @@
+@import './../../../style/common';
+
+.sign_in {
+    width: 100%;
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+
+    form {
+        width: 100%;
+        max-width: 585px;
+        background-color: var(--black);
+        border-radius: 20px;
+        padding-top: 3.6dvh;
+        padding-bottom: 5.5dvh;
+        h2 {
+            text-align: center;
+            @include adaptiveFont(30, 25);
+            margin-bottom: 20px;
+        }
+        .input_block {
+            width: 100%;
+            margin: 0 auto;
+            max-width: 458px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .error {
+            display: block;
+            margin-top: 10px;
+            height: 14px;
+            font-size: 14px;
+            color: var(--red);
+            margin-bottom: 3dvh;
+            text-align: center;
+        }
+        button {
+            margin: 0 auto;
+            display: block;
+        }
+    }
+}

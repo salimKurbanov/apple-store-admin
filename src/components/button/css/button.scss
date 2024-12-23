@@ -1,0 +1,14 @@
+@import './../../../style/common';
+
+.main_button {
+    @include adaptiveFont(16, 14);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    @include adaptiveProperty(padding-left, 70, 30);
+    @include adaptiveProperty(padding-right, 70, 30);
+    border-radius: 15px;
+    &.white {
+        background-color: var(--white);
+        color: var(--black);
+    }
+}

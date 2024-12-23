@@ -1,0 +1,41 @@
+@charset "UTF-8";
+/*-------------Миксины----------------*/
+.main_button {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 15px;
+}
+@media (max-width: 768px) {
+  .main_button {
+    font-size: calc(14px + 3.4 * (100vw - 320px) / 1920);
+  }
+}
+@media (min-width: 768px) {
+  .main_button {
+    font-size: calc(14px + 2 * 0.0520833333vw);
+  }
+}
+@media (max-width: 768px) {
+  .main_button {
+    padding-left: calc(30px + 68 * (100vw - 320px) / 1920);
+  }
+}
+@media (min-width: 768px) {
+  .main_button {
+    padding-left: calc(30px + 40 * 0.0520833333vw);
+  }
+}
+@media (max-width: 768px) {
+  .main_button {
+    padding-right: calc(30px + 68 * (100vw - 320px) / 1920);
+  }
+}
+@media (min-width: 768px) {
+  .main_button {
+    padding-right: calc(30px + 40 * 0.0520833333vw);
+  }
+}
+.main_button.white {
+  background-color: var(--white);
+  color: var(--black);
+}/*# sourceMappingURL=button.css.map */

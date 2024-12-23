@@ -1,0 +1,53 @@
+@charset "UTF-8";
+/*-------------Миксины----------------*/
+.sign_in {
+  width: 100%;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+.sign_in form {
+  width: 100%;
+  max-width: 585px;
+  background-color: var(--black);
+  border-radius: 20px;
+  padding-top: 3.6dvh;
+  padding-bottom: 5.5dvh;
+}
+.sign_in form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+@media (max-width: 768px) {
+  .sign_in form h2 {
+    font-size: calc(25px + 8.5 * (100vw - 320px) / 1920);
+  }
+}
+@media (min-width: 768px) {
+  .sign_in form h2 {
+    font-size: calc(25px + 5 * 0.0520833333vw);
+  }
+}
+.sign_in form .input_block {
+  width: 100%;
+  margin: 0 auto;
+  max-width: 458px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.sign_in form .error {
+  display: block;
+  margin-top: 10px;
+  height: 14px;
+  font-size: 14px;
+  color: var(--red);
+  margin-bottom: 3dvh;
+  text-align: center;
+}
+.sign_in form button {
+  margin: 0 auto;
+  display: block;
+}/*# sourceMappingURL=signin.css.map */

@@ -1,0 +1,26 @@
+@charset "UTF-8";
+/*-------------Миксины----------------*/
+.main_loading {
+  width: 100%;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.main_loading svg {
+  stroke-width: 5px;
+  stroke-dashoffset: 180;
+  stroke-dasharray: 100;
+  stroke: var(--black);
+  fill: none;
+  animation: Spin 0.5s infinite linear;
+}
+
+@keyframes Spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}/*# sourceMappingURL=loading.css.map */
