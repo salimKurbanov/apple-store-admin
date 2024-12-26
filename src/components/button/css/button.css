@@ -38,4 +38,8 @@
 .main_button.white {
   background-color: var(--white);
   color: var(--black);
+}
+.main_button.black {
+  background-color: var(--black);
+  color: var(--white);
 }/*# sourceMappingURL=button.css.map */

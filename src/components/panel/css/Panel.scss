@@ -37,6 +37,17 @@
                     transition: 0.3s;
                 }
             }
+            &.active {
+                background-color: var(--white);
+                svg {
+                    path {
+                        fill: var(--black);
+                    }
+                    rect {
+                        stroke: var(--black);
+                    }
+                }
+            }
             @include mediaMinWidth(992) {
                 &:hover {
                     background-color: var(--white);

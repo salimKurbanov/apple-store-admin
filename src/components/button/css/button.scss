@@ -11,4 +11,8 @@
         background-color: var(--white);
         color: var(--black);
     }
+    &.black {
+        background-color: var(--black);
+        color: var(--white);
+    }
 }
