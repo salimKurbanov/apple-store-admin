@@ -25,6 +25,9 @@ export default function useMain() {
                 setAuth(3)
                 setUser(res.data)
                 return
+            } else {
+                setAuth(2)
+                return
             }
             
         })()

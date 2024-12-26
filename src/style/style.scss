@@ -79,3 +79,28 @@ img {
 input {
     border-radius: 0px;
 }
+
+.main_wrapper {
+    width: 100%;
+    min-height: 100dvh;
+    gap: 10px;
+    padding: 131px 20px 10px 151px;
+    @include mediaMaxWidth(991) {
+        padding: 131px 20px 10px 20px;
+    }
+}
+
+.container {
+    opacity: 0;
+    animation: Open 0.4s forwards;
+}
+
+@keyframes Open {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
