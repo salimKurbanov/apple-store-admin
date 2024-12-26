@@ -1,10 +1,14 @@
 import React from 'react';
-import Button from '../../components/button/Button';
+import './css/home.css';
+import Information from './components/information/Information';
+import Orders from './components/orders/Orders';
+
 
 const Home = () => {
     return (
         <div className='home container'>
-            
+            <Information />
+            <Orders />
         </div>
     );
 };
