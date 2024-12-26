@@ -1,10 +1,11 @@
 import React from 'react';
-import { BrowserRouter as Router} from 'react-router-dom';
+import { Route, BrowserRouter as Router, Routes} from 'react-router-dom';
 import useMain from './useMain';
 import Loading from './components/loading/Loading';
 import SingIn from './pages/signin/SingIn';
 import Button from './components/button/Button';
 import Api from './utils/Api';
+import Home from './pages/home/Home';
 
 
 const App = () => {
@@ -17,7 +18,13 @@ const App = () => {
       ?<Loading />
       :main.auth === 2 
       ?<SingIn />
-      :<>Основная часть <Button callback={() => Api.logout()}>Выходи</Button></>}
+      :<div className='main_wrapper'>
+        <Router>
+          <Routes>
+            <Route path='/' element={<Home />}/>
+          </Routes>
+        </Router>
+      </div>}
     </>
   );
 };
