@@ -40,6 +40,15 @@
 .panel nav .link svg rect {
   transition: 0.3s;
 }
+.panel nav .link.active {
+  background-color: var(--white);
+}
+.panel nav .link.active svg path {
+  fill: var(--black);
+}
+.panel nav .link.active svg rect {
+  stroke: var(--black);
+}
 @media screen and (min-width: 992px) {
   .panel nav .link:hover {
     background-color: var(--white);
