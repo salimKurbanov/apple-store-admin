@@ -27,7 +27,22 @@ const Orders = () => {
         let res = await Api.delete(`api/orders/delete/${id}`)
 
         if(res !== 'error') {
-            return 'ok'
+            setList(prev => ({...prev, oldOrders: prev.oldOrders.filter(el => el.ordersid !== id)}))
+            return
+        }
+    }
+
+    const closeOrder = async (id) => {
+        let res = await Api.put({}, `api/orders/close/order/${id}`)
+
+        if(res !== 'error') {
+            let item = list.newOrders.find(el => el.ordersid === id)
+            setList(prev => ({
+                ...prev, 
+                newOrders: prev.newOrders.filter(el => el.ordersid !== id), 
+                oldOrders: [item, ...prev.oldOrders]
+            }))
+            return 
         }
     }
 
@@ -38,7 +53,7 @@ const Orders = () => {
                 <div className="orders_list">
                     {list.newOrders?.length ? 
                         list.newOrders.map((el) => (
-                            <OrdersItem key={el.ordersid} el={el}/>
+                            <OrdersItem callback={() => closeOrder(el.ordersid)} key={el.ordersid} el={el}/>
                         ))
                     :<></>}
                 </div>
@@ -48,7 +63,7 @@ const Orders = () => {
                 <div className="orders_list">
                     {list.oldOrders?.length ? 
                         list.oldOrders.map((el) => (
-                            <OrdersItem key={el.ordersid} el={el}/>
+                            <OrdersItem callback={() => deleteOrder(el.ordersid)} mode={'disabled'} key={el.ordersid} el={el}/>
                         ))
                     :<></>}
                 </div>

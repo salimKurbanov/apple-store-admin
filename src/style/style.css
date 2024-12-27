@@ -99,12 +99,12 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:active,
 input:-webkit-autofill:focus {
   background-color: var(--background) !important;
-  color: var(--text-color-light) !important;
+  color: var(--black) !important;
   -webkit-box-shadow: 0 0 0 1000px var(--background) inset !important;
-  -webkit-text-fill-color: var(--white) !important;
+  -webkit-text-fill-color: var(--black) !important;
   -webkit-transition: background-color 0s 600000s, color 0s 600000s;
   transition: background-color 0s 600000s, color 0s 600000s;
-  caret-color: var(--white);
+  caret-color: var(--black);
 }
 
 img {

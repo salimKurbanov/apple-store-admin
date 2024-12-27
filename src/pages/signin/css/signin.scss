@@ -19,6 +19,7 @@
             text-align: center;
             @include adaptiveFont(30, 25);
             margin-bottom: 20px;
+            color: var(--white);
         }
         .input_block {
             width: 100%;

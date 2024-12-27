@@ -1,26 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import Api from '../../../../utils/Api';
+import React from 'react';
 
-const Grid = () => {
-
-    const [visits, setVisits] = useState({
-        today: 0,
-        all: 0
-    })
-
-    useEffect(() => {
-
-        (async () => {
-
-            let res = await Api.get('api/visits/today')
-
-            if(res !== 'error') {
-                return setVisits(res)
-            }
-
-        })()
-
-    }, [])
+const Grid = ({visits}) => {
 
     return (
         <div className="statistic_grid">

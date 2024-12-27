@@ -121,7 +121,7 @@
 .home .information .graphic .graphic_grid .day {
   width: 10%;
   text-align: center;
-  height: 100%;
+  height: 80%;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -208,6 +208,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  cursor: pointer;
 }
 .home .orders .order_list_item.disabled {
   opacity: 0.6;
@@ -330,6 +331,28 @@
   .home .orders .order_list_item .info .user .description .date,
   .home .orders .order_list_item .info .user .description .phone {
     font-size: calc(14px + 2 * 0.0520833333vw);
+  }
+}
+.home .orders .order_list_item .info .user .arrow {
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--black);
+  border-radius: 10px;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.home .orders .order_list_item .info .user .arrow svg path {
+  transition: 0.3s;
+}
+@media screen and (min-width: 992px) {
+  .home .orders .order_list_item .info .user .arrow:hover {
+    background-color: var(--black);
+  }
+  .home .orders .order_list_item .info .user .arrow:hover svg path {
+    stroke: var(--white);
   }
 }
 .home .orders .order_list_item .info .user .cross {
