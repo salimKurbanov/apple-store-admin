@@ -1,0 +1,109 @@
+@import './../../../style/common';
+
+.color_picker {
+    width: 250px;
+    background-color: var(--white);
+    border-radius: 15px;
+    @include adaptiveProperty(padding, 25, 10);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    & h2 {
+        font-weight: 600;
+        font-size: 18px;
+        color: var(--black);
+    }
+
+    .image_container {
+        position: relative;
+        width: 100%;
+        border-radius: 10px;
+
+        & img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .pointer {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            transform: translate(-50%, -50%);
+            height: 15px;
+            width: 15px;
+            border-radius: 50%;
+            border: 2px solid var(--white);
+            box-shadow: 0 0 2px 0 #000;
+        }
+    }
+
+    .transparency {
+        width: 100%;
+
+        & h4 {
+            @include adaptiveFont(16, 14);
+            text-transform: lowercase;
+            color: var(--black);  
+            margin-bottom: 3.5px;
+        }
+
+        & input {
+            width: 100%;
+        }
+
+        /* Удаляем стандартные стили браузера */
+        input[type="range"] {
+            -webkit-appearance: none; /* Chrome, Safari, Opera */
+            appearance: none; /* Firefox */
+            width: 100%;
+            height: 15px;
+            border-radius: 10px;
+            background: linear-gradient(
+            90deg,
+            rgb(0, 0, 0) 2.29%,
+            rgba(128, 128, 128, 0.15) 99.978%,
+            rgba(255, 255, 255, 0) 100%
+            );
+            border-radius: 8px; /* Края трека */
+            outline: none;
+            margin: 0; /* Убираем дополнительные отступы */
+        }
+        
+        /* Стилизация ползунка */
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none; /* Убираем стандартный стиль */
+            appearance: none; /* Для совместимости */
+            width: 15px;
+            height: 15px;
+            background-color: var(--grey); /* Цвет ползунка */
+            border: 2px solid var(--black); /* Обводка */
+            border-radius: 50%; /* Делаем круглый */
+            cursor: pointer;
+        }
+        
+        input[type="range"]::-moz-range-thumb {
+            width: 15px;
+            height: 15px;
+            background-color: var(--grey); /* Цвет ползунка */
+            border: 2px solid var(--black); /* Обводка */
+            border-radius: 50%; /* Делаем круглый */
+            cursor: pointer;
+        }
+        
+        input[type="range"]::-ms-thumb {
+            width: 15px;
+            height: 15px;
+            background-color: var(--grey); /* Цвет ползунка */
+            border: 2px solid var(--black); /* Обводка */
+            border-radius: 50%; /* Делаем круглый */
+            cursor: pointer;
+        }
+        
+        /* Для заполнения слева от ползунка (в Chrome, Edge, Opera) */
+        input[type="range"]::-webkit-slider-runnable-track {
+            height: 15px;
+            border-radius: 10px;
+        }
+    }
+}

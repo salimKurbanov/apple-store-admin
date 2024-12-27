@@ -3,7 +3,7 @@
 .input_field .label {
   white-space: nowrap;
   text-transform: lowercase;
-  color: var(--white);
+  color: var(--black);
   margin-bottom: 3.5px;
 }
 @media (max-width: 768px) {

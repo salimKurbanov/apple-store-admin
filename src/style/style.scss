@@ -8,6 +8,7 @@
     --main-font: "Montserrat", serif;
     --grey: #DFE2EB;
     --red: red;
+    --blue: #2397FE;
 }
 
 *{
@@ -82,7 +83,9 @@ input {
 
 .main_wrapper {
     width: 100%;
+    max-width: 1800px;
     min-height: 100dvh;
+    margin-right: auto;
     gap: 10px;
     padding: 131px 20px 10px 151px;
     @include mediaMaxWidth(991) {
@@ -93,6 +96,10 @@ input {
 .container {
     opacity: 0;
     animation: Open 0.4s forwards;
+}
+
+.shadow {
+    box-shadow: 0 0 20px 0 rgba(110, 110, 110, 0.25);
 }
 
 @keyframes Open {
