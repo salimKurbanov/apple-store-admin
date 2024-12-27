@@ -174,4 +174,8 @@ Api.logout = () => {
     return window.location.reload()
 }
 
+Api.course = async () => {
+    
+}
+
 export default Api;

@@ -2,7 +2,7 @@ import React from 'react';
 import Button from '../../../../components/button/Button';
 import Api from '../../../../utils/Api';
 
-const OrdersItem = ({mode, el, callback}) => {
+const OrdersItem = ({course, mode, el, callback}) => {
 
       function formatDate(isoDate) {
         const date = new Date(isoDate);
@@ -28,7 +28,7 @@ const OrdersItem = ({mode, el, callback}) => {
                     <div className="description">
                         <div className="name">{el.title}</div>
                         <div className="memory">{el.memory}</div>
-                        <div className="price">{el.price} руб.</div>
+                        <div className="price">{(el.price / 100).toFixed(2)} руб.</div>
                     </div>
                 </div>
                 <div className="user">

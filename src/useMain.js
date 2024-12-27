@@ -6,6 +6,7 @@ export default function useMain() {
 
     const [auth, setAuth] = useState(1)
     const [user, setUser] = useState({})
+    const [course, setCourse] = useState(1)
 
     useEffect(() => {
                 
@@ -20,6 +21,11 @@ export default function useMain() {
             }
 
             let res = await Api.init(token)
+            let req = await Api.get('api/course/dollar')
+
+            if(req !== 'error') {
+                setCourse(req)
+            }
 
             if(res.success) {
                 setAuth(3)
@@ -36,6 +42,7 @@ export default function useMain() {
 
     return {
         auth,
-        user
+        user,
+        course
     }
 }

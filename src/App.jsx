@@ -5,6 +5,7 @@ import Loading from './components/loading/Loading';
 import SingIn from './pages/signin/SingIn';
 import Home from './pages/home/Home';
 import Panel from './components/panel/Panel';
+import Headers from './components/headers/Headers';
 
 
 const App = () => {
@@ -20,10 +21,11 @@ const App = () => {
       :<div className='main_wrapper'>
         <Router>
 
+          <Headers course={main.course}/>
           <Panel />
 
           <Routes>
-            <Route path='/' element={<Home />}/>
+            <Route path='/' element={<Home course={main.course}/>}/>
           </Routes>
         </Router>
       </div>}

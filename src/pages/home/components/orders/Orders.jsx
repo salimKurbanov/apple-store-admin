@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import OrdersItem from './OrdersItem';
 import Api from '../../../../utils/Api';
 
-const Orders = () => {
+const Orders = ({course}) => {
 
     const [list, setList] = useState({
         newOrders: [],
@@ -53,7 +53,7 @@ const Orders = () => {
                 <div className="orders_list">
                     {list.newOrders?.length ? 
                         list.newOrders.map((el) => (
-                            <OrdersItem callback={() => closeOrder(el.ordersid)} key={el.ordersid} el={el}/>
+                            <OrdersItem course={course} callback={() => closeOrder(el.ordersid)} key={el.ordersid} el={el}/>
                         ))
                     :<></>}
                 </div>
@@ -63,7 +63,7 @@ const Orders = () => {
                 <div className="orders_list">
                     {list.oldOrders?.length ? 
                         list.oldOrders.map((el) => (
-                            <OrdersItem callback={() => deleteOrder(el.ordersid)} mode={'disabled'} key={el.ordersid} el={el}/>
+                            <OrdersItem course={course} callback={() => deleteOrder(el.ordersid)} mode={'disabled'} key={el.ordersid} el={el}/>
                         ))
                     :<></>}
                 </div>
