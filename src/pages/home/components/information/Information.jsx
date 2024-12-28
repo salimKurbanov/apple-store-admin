@@ -11,15 +11,26 @@ const Information = () => {
         all: 0,
         list: []
     })
+    const [statistics, setStatistics] = useState({
+        all: 0,
+        current: 0,
+        sold: 0,
+        profit: 0
+    })
 
     useEffect(() => {
 
         (async () => {
 
             let res = await Api.get('api/visits/today')
+            let statistics = await Api.get(`api/orders/statistics`)
 
             if(res !== 'error') {
-                return setVisits(prev => ({...prev, today: res.today, all: res.all, list: res.list}))
+                setVisits(prev => ({...prev, today: res.today, all: res.all, list: res.list}))
+            }
+
+            if(statistics !== 'error') {
+                setStatistics(statistics)
             }
 
         })()
@@ -31,7 +42,7 @@ const Information = () => {
 
             <div className="statistic">
                 <Head />
-                <Grid visits={visits}/>
+                <Grid visits={visits} statistics={statistics}/>
             </div>
             
             <Graphic list={visits.list}/>

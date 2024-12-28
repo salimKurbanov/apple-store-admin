@@ -2,7 +2,7 @@ import React from 'react';
 import Button from '../../../../components/button/Button';
 import Api from '../../../../utils/Api';
 
-const OrdersItem = ({course, mode, el, callback}) => {
+const OrdersItem = ({mode, el, callback}) => {
 
       function formatDate(isoDate) {
         const date = new Date(isoDate);
@@ -26,7 +26,7 @@ const OrdersItem = ({course, mode, el, callback}) => {
                 <div className="product">
                     <img src={`${Api.url}images/products/${el.image}`} alt="" />
                     <div className="description">
-                        <div className="name">{el.title}</div>
+                        <div className="name" title={el.title}>{el.title}</div>
                         <div className="memory">{el.memory}</div>
                         <div className="price">{(el.price / 100).toFixed(2)} руб.</div>
                     </div>
@@ -34,17 +34,10 @@ const OrdersItem = ({course, mode, el, callback}) => {
                 <div className="user">
                     <div className="description">
                         <div className="name">{el.username}</div>
-                        <div className="date">{formatDate(el.datetime)}</div>
-                        <div className="phone">{el.phone}</div>
+                        <div className="date"><img src="/images/icons/clock.svg" alt="" />{formatDate(el.datetime)}</div>
+                        <div className="phone"><img src="/images/icons/phone.svg" alt="" />{el.phone}</div>
                     </div>
-                    {mode === 'disabled' ? 
-                    <div className="cross" onClick={callback}>
-                        <svg width="15.707031" height="15.707108" viewBox="0 0 15.707 15.7071" fill="none" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
-                            <defs/>
-                            <line id="Линия 2" x1="0.353516" y1="0.353546" x2="15.353516" y2="15.353546" stroke="#000000" strokeOpacity="1.000000" strokeWidth="1.000000"/>
-                            <line id="Линия 2" x1="15.353516" y1="0.353546" x2="0.353516" y2="15.353546" stroke="#000000" strokeOpacity="1.000000" strokeWidth="1.000000"/>
-                        </svg>
-                    </div>
+                    {mode === 'disabled' ? <></>
                     :<div className="arrow" onClick={callback}>
                         <svg width="15.997070" height="18.907997" viewBox="0 0 15.9971 18.908" fill="none" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
                             <defs/>

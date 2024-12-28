@@ -5,15 +5,16 @@ import Orders from './components/orders/Orders';
 import Store from '../../utils/Store';
 
 
-const Home = ({course}) => {
+const Home = () => {
 
     useEffect(() => {
         Store.setListener('title', 'Главная')   
     }, [])
+    
     return (
         <div className='home container'>
             <Information />
-            <Orders course={course.value}/>
+            <Orders />
         </div>
     );
 };

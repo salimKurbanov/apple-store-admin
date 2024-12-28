@@ -6,6 +6,7 @@ import SingIn from './pages/signin/SingIn';
 import Home from './pages/home/Home';
 import Panel from './components/panel/Panel';
 import Headers from './components/headers/Headers';
+import Notice from './components/notice/Notice';
 
 
 const App = () => {
@@ -21,14 +22,16 @@ const App = () => {
       :<div className='main_wrapper'>
         <Router>
 
-          <Headers course={main.course}/>
+          <Headers />
           <Panel />
 
           <Routes>
-            <Route path='/' element={<Home course={main.course}/>}/>
+            <Route path='/' element={<Home />}/>
           </Routes>
         </Router>
       </div>}
+
+      <Notice.Init />
     </>
   );
 };
