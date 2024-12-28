@@ -1,72 +1,36 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import OrdersItem from './OrdersItem';
-import Api from '../../../../utils/Api';
+import useOrders from '../../hooks/useOrders';
 
-const Orders = ({course}) => {
+const Orders = () => {
 
-    const [list, setList] = useState({
-        newOrders: [],
-        oldOrders: []
-    })
-
-    useEffect(() => {
-
-        (async () => {
-
-            let res = await Api.get('api/orders/all')
-
-            if(res !== 'error') {
-                return setList(prev => ({...prev, newOrders: res.newOrders, oldOrders: res.oldOrders}))
-            }
-
-        })()
-
-    }, [])
-
-    const deleteOrder = async (id) => {
-        let res = await Api.delete(`api/orders/delete/${id}`)
-
-        if(res !== 'error') {
-            setList(prev => ({...prev, oldOrders: prev.oldOrders.filter(el => el.ordersid !== id)}))
-            return
-        }
-    }
-
-    const closeOrder = async (id) => {
-        let res = await Api.put({}, `api/orders/close/order/${id}`)
-
-        if(res !== 'error') {
-            let item = list.newOrders.find(el => el.ordersid === id)
-            setList(prev => ({
-                ...prev, 
-                newOrders: prev.newOrders.filter(el => el.ordersid !== id), 
-                oldOrders: [item, ...prev.oldOrders]
-            }))
-            return 
-        }
-    }
+    const orders = useOrders()
 
     return (
         <div className="orders">
             <div className="new_orders">
-                <div className="title">Заказы</div>
-                <div className="orders_list">
-                    {list.newOrders?.length ? 
-                        list.newOrders.map((el) => (
-                            <OrdersItem course={course} callback={() => closeOrder(el.ordersid)} key={el.ordersid} el={el}/>
-                        ))
-                    :<></>}
-                </div>
+                {orders.list.newOrders?.length ? 
+                    <>
+                    <div className="title">Заказы</div>
+                    <div className="orders_list">
+                        {orders.list.newOrders.map((el) => (
+                            <OrdersItem callback={() => orders.closeOrder(el.ordersid)} key={el.ordersid} el={el}/>
+                        ))}
+                    </div>
+                    </>
+                :<></>}
             </div>
             <div className="history">
-                <div className="title">История</div>
-                <div className="orders_list">
-                    {list.oldOrders?.length ? 
-                        list.oldOrders.map((el) => (
-                            <OrdersItem course={course} callback={() => deleteOrder(el.ordersid)} mode={'disabled'} key={el.ordersid} el={el}/>
-                        ))
-                    :<></>}
-                </div>
+                {orders.list.oldOrders?.length ? 
+                    <>
+                    <div className="title">История</div>
+                    <div className="orders_list">
+                        {orders.list.oldOrders.map((el) => (
+                            <OrdersItem mode={'disabled'} key={el.ordersid} el={el}/>
+                        ))}
+                    </div>
+                    </>
+                :<></>}
             </div>
         </div>
     );

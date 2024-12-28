@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 const Graphic = ({list}) => {
 
     const [top, setTop] = useState(0)
+    const [date, setDate] = useState(new Date())
 
     useEffect(() => {
 
@@ -29,7 +30,7 @@ const Graphic = ({list}) => {
                     list.map((el, i) => (
                         <div className={`day ${el.weekday === 'СБ' || el.weekday === 'ВС' ? 'weekend' : ''}`} key={i}>
                             <div className="scale" style={{height: `${el.count/top*100}%`}}>
-                                <div className="label">{el.count} чел.</div>
+                                <div className={`label ${el.day === date.getDate() ? 'current' : ''}`}>{el.count} чел.</div>
                             </div>
                             <div className="day_name">{el.weekday}</div>
                         </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Grid = ({visits}) => {
+const Grid = ({visits, statistics}) => {
 
     return (
         <div className="statistic_grid">
@@ -11,13 +11,13 @@ const Grid = ({visits}) => {
             </div>
             <div className="statistic_item shadow">
                 <h2>Продано товара</h2>
-                <div className="count">345 ед.</div>
-                <div className="all">Прибыль:: 24344 руб.</div>
+                <div className="count">{statistics.sold} ед.</div>
+                <div className="all">Прибыль: <span>{(statistics.profit / 100).toFixed(2)} руб.</span></div>
             </div>
             <div className="statistic_item shadow">
                 <h2>Заказы</h2>
-                <div className="count">23</div>
-                <div className="all">Всего:: 24344.</div>
+                <div className="count">{statistics.current}</div>
+                <div className="all">Всего: {statistics.all}.</div>
             </div>
         </div>
     );
