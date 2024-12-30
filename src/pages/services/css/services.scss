@@ -1,0 +1,231 @@
+@import './../../../style/common';
+
+.services {
+    display: flex;
+    gap: 10px;
+    .services_panel {
+        width: 100%;
+        flex: 1;
+        form {
+            width: 100%;
+            max-width: 458px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            .icon {
+                h3 {
+                    white-space: nowrap;
+                    @include adaptiveFont(16, 14);
+                    text-transform: lowercase;
+                    color: var(--black);  
+                    margin-bottom: 3.5px;
+                }
+                label {
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 10px;
+                    background-color: var(--grey);
+                    overflow: hidden;
+                    cursor: pointer;
+                    span {
+                        font-size: 30px;
+                    }
+
+                    input {
+                        width: 0;
+                        height: 0;
+                    }
+                    img {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        object-fit: contain;
+                        object-position: center;
+                    }
+                }
+            }
+            button {
+                margin-top: 10px;
+            }
+        }
+
+        .price_list {
+            position: relative;
+            margin-top: 70px;
+            z-index: 2;
+            
+            & h3 {
+                color: var(--white);
+                @include adaptiveFont(28, 24);
+                margin-bottom: 20px;
+                @include adaptiveProperty(padding-left, 100, 15);
+                @include adaptiveProperty(padding-right, 100, 15);
+            }
+    
+            .splide {
+                .splide__track   {
+                    padding: 20px;
+                }
+                .splide__slide  {
+                    display: flex;
+                    flex-direction: column;
+                    @include adaptiveProperty(width, 320, 250);
+                    @include adaptiveProperty(padding, 30, 15);
+                    background-color: var(--white);
+                    border-radius: 30px;
+                    box-shadow: 0 0 20px 0 rgba(110, 110, 110, 0.25);
+                    
+                    .head {
+                        display: flex;
+                        gap: 5px;
+
+                        .preview_image {   
+                            position: relative;
+                            width: 40px;
+                            height: 40px;
+                            margin-right: auto;
+                            img {
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                width: 100%;
+                                height: 100%;
+                                object-position: center;
+                                object-fit: contain;
+                            }
+                        }
+
+                        .icon {
+                            width: 20px;
+                            height: 20px;
+                            border-radius: 5px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            background-color: var(--black);
+                            border: 1px solid var(--black);    
+                            transition: 0.3s;
+                            cursor: pointer;
+
+                            svg {
+                                line,
+                                path {
+                                    stroke: var(--white);
+                                    transition: 0.3s;
+                                }
+                            }
+                            @include mediaMinWidth(768) {
+                                &:hover {
+                                    background-color: transparent;
+                                    svg {
+                                        line,
+                                        path {
+                                            stroke: var(--black);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    & h4 {
+                        font-weight: 500;
+                        @include adaptiveFont(28, 22);
+                        margin-top: 14px;
+                        margin-bottom: 10px;
+                        color: var(--black);
+                    }
+    
+                    .description {
+                        font-weight: 300;
+                        font-size: 16px;
+                        @include adaptiveFont(16, 14);
+                        color: var(--black);
+                        margin-bottom: 25px;
+                    }
+    
+                    .price {
+                        font-weight: 600;
+                        @include adaptiveFont(16, 14);
+                        margin-top: auto;
+    
+                        & span {
+                            color: var(--blue);
+                        }
+                    }
+                }
+            }
+    
+            .custom_arrows {
+                margin-top: 30px;
+                @include adaptiveProperty(padding-right, 100, 15);
+                @include adaptiveProperty(padding-left, 100, 15);
+                display: flex;
+                align-items: center;
+                gap: 20px;
+    
+                .custom_arrow {
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 40px;
+                    width: 40px;
+                    flex-shrink: 0;
+                    background: var(--black);
+                    transition: 0.3s ease;
+                    border: 1px solid var(--black);
+                    svg {
+                        path {
+                            fill: var(--white);
+                            transition: 0.3s;
+                        }
+                    }
+                    &.prev svg {
+                        position: relative;
+                        right: 1px;
+                    }
+                    &.next svg {
+                        position: relative;
+                        left: 1px;
+                    }
+    
+                    @include mediaMinWidth(992) {
+                        &:hover {
+                            background-color: transparent;
+                            svg {
+                                path {
+                                    fill: var(--black);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+    
+            .button_flex {
+                margin-top: 60px;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+                @include adaptiveProperty(padding-right, 100, 15);
+                @include adaptiveProperty(padding-left, 100, 15);
+    
+                .slogan {
+                    font-size: 18px;
+                    color: var(--white);
+                    text-align: center;
+                }
+            }
+        }
+    }
+}

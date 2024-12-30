@@ -50,4 +50,8 @@
     background-color: transparent;
     color: var(--black);
   }
+}
+.main_button.max-content {
+  width: -moz-max-content;
+  width: max-content;
 }/*# sourceMappingURL=button.css.map */

@@ -1,47 +1,53 @@
 @charset "UTF-8";
 /*-------------Миксины----------------*/
-.input_field .label {
+.textarea_field.full {
+  width: 100%;
+}
+.textarea_field.full textarea {
+  width: 100%;
+}
+.textarea_field.error textarea {
+  background-color: var(--error);
+}
+.textarea_field .label {
   white-space: nowrap;
   text-transform: lowercase;
   color: var(--black);
   margin-bottom: 3.5px;
 }
 @media (max-width: 768px) {
-  .input_field .label {
+  .textarea_field .label {
     font-size: calc(14px + 3.4 * (100vw - 320px) / 1920);
   }
 }
 @media (min-width: 768px) {
-  .input_field .label {
+  .textarea_field .label {
     font-size: calc(14px + 2 * 0.0520833333vw);
   }
 }
-.input_field input {
+.textarea_field textarea {
   padding: 10px 15px;
   border-radius: 15px;
   background-color: var(--grey);
   color: var(--black);
-  transition: 0.3s;
+  resize: none;
+  flex-shrink: 0;
+  height: 45px;
+  overflow: hidden;
 }
 @media (max-width: 768px) {
-  .input_field input {
+  .textarea_field textarea {
     font-size: calc(18px + 3.4 * (100vw - 320px) / 1920);
   }
 }
 @media (min-width: 768px) {
-  .input_field input {
+  .textarea_field textarea {
     font-size: calc(18px + 2 * 0.0520833333vw);
   }
 }
-.input_field.full input {
-  width: 100%;
-}
-.input_field.error input {
-  background-color: var(--error);
-}
-.input_field .error_message {
+.textarea_field .error_message {
   height: 14px;
-  font-size: 14px;
+  font-size: 13px;
   color: var(--red);
   margin-top: 3px;
-}/*# sourceMappingURL=input.css.map */
+}/*# sourceMappingURL=textarea.css.map */

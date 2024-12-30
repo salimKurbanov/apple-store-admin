@@ -1,16 +1,20 @@
-import React, { useEffect } from 'react';
-import Store from '../../utils/Store';
-import Input from '../../components/input/Input';
+import React from 'react';
+import './css/services.css';
+import Form from './components/Form';
+import List from './components/List';
+
 
 const Services = () => {
 
-    useEffect(() => {
-        Store.setListener('title', 'Услуги')   
-    }, [])
-
     return (
         <div className='services container'>
-            <Input label={'название'} />
+
+            <div className="services_panel">
+                <Form />
+                <List />
+            </div>
+
+            <div className="services_orders"></div>
         </div>
     );
 };
