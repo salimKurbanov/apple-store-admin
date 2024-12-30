@@ -7,6 +7,8 @@ import Home from './pages/home/Home';
 import Panel from './components/panel/Panel';
 import Product from './pages/product/Product';
 import AddCharacterModal from './modal/add_characters/AddCharacterModal';
+import Headers from './components/headers/Headers';
+import Notice from './components/notice/Notice';
 
 
 const App = () => {
@@ -22,6 +24,7 @@ const App = () => {
       :<div className='main_wrapper'>
         <Router>
 
+          <Headers />
           <Panel />
 
           <Routes>
@@ -32,6 +35,8 @@ const App = () => {
 
         <AddCharacterModal />
       </div>}
+
+      <Notice.Init />
     </>
   );
 };

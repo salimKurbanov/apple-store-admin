@@ -71,6 +71,10 @@ Api.postFormData = async (path, data) => {
 
         res = await res.json()
 
+        if(res.status === 401) {
+            return Api.logout()
+        }
+
         return res
     } catch(e) {
         console.log(e)
@@ -91,6 +95,10 @@ Api.delete = async (path) => {
         })
 
         res = await res?.json()
+
+        if(res.status === 401) {
+            return Api.logout()
+        }
 
         if(res.success) {
             return res
@@ -117,6 +125,39 @@ Api.post = async (body, path) => {
 
         res = await res?.json()
 
+        if(res.status === 401) {
+            return Api.logout()
+        }
+
+        if(res.success) {
+            return res
+        } else {
+            return 'error'
+        }
+
+    } catch(e) {
+        return 'error'
+    }
+}
+
+Api.put = async (body, path) => {
+    try {
+
+        let res = await fetch(`${Api.url}${path}`, {
+            method: 'PUT',
+            headers: {
+                "Content-Type": "application/json;charset=utf-8",
+                ssid: localStorage.getItem('accessToken')
+            },
+            body: JSON.stringify(body)
+        })
+
+        res = await res?.json()
+
+        if(res.status === 401) {
+            return Api.logout()
+        }
+
         if(res.success) {
             return res
         } else {
@@ -131,6 +172,10 @@ Api.post = async (body, path) => {
 Api.logout = () => {
     localStorage.removeItem('accessToken')
     return window.location.reload()
+}
+
+Api.course = async () => {
+    
 }
 
 export default Api;

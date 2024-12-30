@@ -20,7 +20,7 @@ export default function useMain() {
             }
 
             let res = await Api.init(token)
-
+            
             if(res.success) {
                 setAuth(3)
                 setUser(res.data)
@@ -36,6 +36,6 @@ export default function useMain() {
 
     return {
         auth,
-        user
+        user,
     }
 }
