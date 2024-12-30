@@ -4,6 +4,7 @@
   padding-top: 10px;
   padding-bottom: 10px;
   border-radius: 15px;
+  transition: 0.3s;
 }
 @media (max-width: 768px) {
   .main_button {
@@ -41,5 +42,12 @@
 }
 .main_button.black {
   background-color: var(--black);
+  border: 2px solid var(--black);
   color: var(--white);
+}
+@media screen and (min-width: 992px) {
+  .main_button.black:hover {
+    background-color: transparent;
+    color: var(--black);
+  }
 }/*# sourceMappingURL=button.css.map */
