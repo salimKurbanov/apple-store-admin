@@ -23,6 +23,9 @@
   font-size: 18px;
   color: var(--black);
 }
+.color_picker .input_field input {
+  text-transform: uppercase;
+}
 .color_picker .image_container {
   position: relative;
   width: 100%;
@@ -42,6 +45,11 @@
   border-radius: 50%;
   border: 2px solid var(--white);
   box-shadow: 0 0 2px 0 #000;
+  transition: 0.1;
+  pointer-events: none;
+}
+.color_picker .image_container .gradient {
+  border-radius: 10px;
 }
 .color_picker .transparency {
   width: 100%;
@@ -66,6 +74,7 @@
 }
 .color_picker .transparency input {
   width: 100%;
+  cursor: pointer;
 }
 .color_picker .transparency input[type=range] {
   -webkit-appearance: none; /* Chrome, Safari, Opera */
@@ -74,7 +83,7 @@
   width: 100%;
   height: 15px;
   border-radius: 10px;
-  background: linear-gradient(90deg, rgb(0, 0, 0) 2.29%, rgba(128, 128, 128, 0.15) 99.978%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(270deg, rgb(0, 0, 0) 2.29%, rgba(128, 128, 128, 0.15) 99.978%, rgba(255, 255, 255, 0) 100%);
   border-radius: 8px; /* Края трека */
   outline: none;
   margin: 0; /* Убираем дополнительные отступы */

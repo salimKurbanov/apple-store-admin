@@ -68,7 +68,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--grey);
+  transition: 0.1s;
   cursor: pointer;
 }
 .product .producct_form .data_container .common_data .color_flex .input_field {

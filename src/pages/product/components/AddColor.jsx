@@ -1,16 +1,15 @@
 import React from 'react';
-import Cross from '../../../components/cross/Cross';
 import Input from '../../../components/input/Input';
+import AddColorBtn from './AddColorBtn';
 
 const AddColor = ({commonData, inputCommonData}) => {
+
     return (
         <div className='add_color_wrapper'>
             <h4>цвет</h4>
 
             <div className="color_flex">
-                <div className="add_color_btn shadow">
-                    <Cross />
-                </div>
+                <AddColorBtn />
 
                 <Input 
                     label={''} 

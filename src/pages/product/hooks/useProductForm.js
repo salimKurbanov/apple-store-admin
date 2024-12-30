@@ -16,6 +16,10 @@ export default function useProductForm () {
         setCharacters(prev => ([...prev, data]))
     })
 
+    Store.useListener('sendColorToForm', (data) => {
+        setCommonData(prev => ({...prev, color: data}))
+    })
+
     const inputCommonData = (e, name) => {
         let value = e.target.value
 
