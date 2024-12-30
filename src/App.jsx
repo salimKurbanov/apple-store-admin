@@ -7,6 +7,7 @@ import Home from './pages/home/Home';
 import Panel from './components/panel/Panel';
 import Headers from './components/headers/Headers';
 import Notice from './components/notice/Notice';
+import Services from './pages/services/Services';
 
 
 const App = () => {
@@ -27,6 +28,7 @@ const App = () => {
 
           <Routes>
             <Route path='/' element={<Home />}/>
+            <Route path='/services' element={<Services />}/>
           </Routes>
         </Router>
       </div>}
