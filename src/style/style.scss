@@ -89,7 +89,7 @@ input {
     gap: 10px;
     padding: 131px 20px 10px 151px;
     @include mediaMaxWidth(991) {
-        padding: 131px 20px 10px 20px;
+        padding: 131px 10px 10px 10px;
     }
 }
 

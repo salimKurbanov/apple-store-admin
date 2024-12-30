@@ -11,4 +11,4 @@ const Button = ({callback, mode, children, type}) => {
     );
 };
 
-export default Button;
+export default Button; 
