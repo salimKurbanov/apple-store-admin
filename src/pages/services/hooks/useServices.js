@@ -102,6 +102,7 @@ export default function useServices() {
         }
 
         Notice.Send({type: 'success', text: req.message})
+        Store.setListener('newService', (req.data))
         
     }
 
