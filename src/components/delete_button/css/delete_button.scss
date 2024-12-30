@@ -1,0 +1,22 @@
+@import './../../../style/common';
+
+.delete_btn {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    flex-grow: 0;
+    background-color: var(--black);
+    border: 2px solid var(--black);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+    cursor: pointer;
+
+    @include mediaMinWidth(992) {
+        &:hover {
+            background-color: transparent;
+        }
+    }
+}

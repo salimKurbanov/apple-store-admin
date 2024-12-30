@@ -215,6 +215,7 @@ input {
     transform: translateY(200%);
   }
 }
+
 @keyframes Open {
   0% {
     opacity: 0;

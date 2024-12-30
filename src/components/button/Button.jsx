@@ -2,10 +2,10 @@ import React from 'react';
 import './css/button.css';
 
 
-const Button = ({callback, mode, children}) => {
+const Button = ({callback, mode, children, type}) => {
 
     return (
-        <button onClick={callback} className={`main_button ${mode}`} >
+        <button type={type} onClick={callback} className={`main_button ${mode}`} >
             {children}
         </button>
     );
