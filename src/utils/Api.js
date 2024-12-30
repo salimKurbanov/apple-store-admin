@@ -66,7 +66,10 @@ Api.postFormData = async (path, data) => {
     try {
         let res = await fetch(`${Api.url}${path}`, {
             method: 'POST',
-            body: data
+            body: data,
+            headers: {
+                ssid: localStorage.getItem('accessToken')
+            }
         })
 
         res = await res.json()

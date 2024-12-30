@@ -1,0 +1,59 @@
+@import './../../../style/common';
+
+.services {
+    display: flex;
+    gap: 10px;
+    .services_panel {
+        width: 100%;
+        flex: 1;
+        form {
+            width: 100%;
+            max-width: 458px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            .icon {
+                h3 {
+                    white-space: nowrap;
+                    @include adaptiveFont(16, 14);
+                    text-transform: lowercase;
+                    color: var(--black);  
+                    margin-bottom: 3.5px;
+                }
+                label {
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 10px;
+                    background-color: var(--grey);
+                    overflow: hidden;
+                    cursor: pointer;
+                    span {
+                        font-size: 30px;
+                    }
+
+                    input {
+                        width: 0;
+                        height: 0;
+                    }
+                    img {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        object-fit: contain;
+                        object-position: center;
+                    }
+                }
+            }
+            button {
+                margin-top: 10px;
+            }
+        }
+    }
+}
