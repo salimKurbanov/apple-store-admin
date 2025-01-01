@@ -16,7 +16,7 @@ const Form = () => {
 
             <div className="icon">
                 <h3>иконка</h3>
-                <label htmlFor="preview">
+                <label className={services.error.image ? 'error' : ''} htmlFor="preview">
                     <input id='preview' value={''} type="file" onChange={services.previewImg}/>
                     {services.input.preview 
                     ? <img src={services.input.preview} alt="" className="cover_image" /> 

@@ -32,6 +32,9 @@
                     background-color: var(--grey);
                     overflow: hidden;
                     cursor: pointer;
+                    &.error {
+                        background-color: var(--error);
+                    }
                     span {
                         font-size: 30px;
                     }
