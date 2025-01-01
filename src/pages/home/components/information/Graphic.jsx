@@ -11,7 +11,7 @@ const Graphic = ({list}) => {
             let count = 0;
     
             for (const el of list) {
-                const value = await Promise.resolve(el.count)
+                const value = await Promise.resolve(el.count.length)
                 if (value > count) {
                     count = value;
                 }
@@ -29,8 +29,8 @@ const Graphic = ({list}) => {
                 {list?.length ? 
                     list.map((el, i) => (
                         <div className={`day ${el.weekday === 'СБ' || el.weekday === 'ВС' ? 'weekend' : ''}`} key={i}>
-                            <div className="scale" style={{height: `${el.count/top*100}%`}}>
-                                <div className={`label ${el.day === date.getDate() ? 'current' : ''}`}>{el.count} чел.</div>
+                            <div className="scale" style={{height: `${el.count.length/top * 100}%`}}>
+                                <div className={`label ${el.day === date.getDate() ? 'current' : ''}`}>{el.count.length} чел.</div>
                             </div>
                             <div className="day_name">{el.weekday}</div>
                         </div>

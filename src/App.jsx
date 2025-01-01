@@ -9,6 +9,7 @@ import Product from './pages/product/Product';
 import AddCharacterModal from './modal/add_characters/AddCharacterModal';
 import Headers from './components/headers/Headers';
 import Notice from './components/notice/Notice';
+import Services from './pages/services/Services';
 
 
 const App = () => {
@@ -29,6 +30,7 @@ const App = () => {
 
           <Routes>
             <Route path='/' element={<Home />}/>
+            <Route path='/services' element={<Services />}/>
             <Route path='/products' element={<Product />}/>
           </Routes>
         </Router>
