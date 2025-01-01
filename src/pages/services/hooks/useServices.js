@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import Api from "../../../utils/Api"
 import Store from "../../../utils/Store"
+import { validateFields } from "../../../utils/Services"
 
 
 export default function useServices() {
@@ -8,7 +9,8 @@ export default function useServices() {
     const [error, setError] = useState({
         description: false,
         title: false,
-        price: false
+        price: false,
+        image: false
     })
     const [input, setInput] = useState({
         description: '',
@@ -40,6 +42,7 @@ export default function useServices() {
     };
 
     const previewImg = (e) => {
+        setError(prev => ({...prev, image: false}))
         setInput(prev => ({...prev, image: e.target.files[0], preview: URL.createObjectURL(e.target.files[0])}))
     }
 
@@ -81,11 +84,34 @@ export default function useServices() {
 
     const submitForm = async (e) => {
         e.preventDefault()
+        
+        let err = false
 
-        if(error.description || error.price || error.title || !input.image || !input.title || !input.price || !input.description) {
+        const emptyFields = validateFields(input)
+
+        if(emptyFields) {
+            setError(prev => ({
+                ...prev,
+                ...emptyFields.reduce((acc, field) => {
+                    acc[field] = "Обязательное поле";
+                    return acc;
+                }, {})
+            }));
+
+            err = true
+        }
+
+        if(!input.image) {
+            setError(prev => ({...prev, image: true}))
+            err = true
+        }
+
+
+        if(err) {
             Store.setListener('notice', {type: 'error', text: 'Заполните правильно все поля'})
             return
         }
+
 
         let data = new FormData()
         data.append('title', input.title)
@@ -93,7 +119,7 @@ export default function useServices() {
         data.append('image', input.image)
         data.append('price', input.price)
 
-        let req = await Api.postFormData('api/services/create', data)
+        let req = await Api.postFormData(data, 'api/services/create')
 
         if(req === 'error') {
             Store.setListener('notice', {type: 'error', text: req.message})

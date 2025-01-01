@@ -43,6 +43,9 @@
   overflow: hidden;
   cursor: pointer;
 }
+.services .services_panel form .icon label.error {
+  background-color: var(--error);
+}
 .services .services_panel form .icon label span {
   font-size: 30px;
 }
