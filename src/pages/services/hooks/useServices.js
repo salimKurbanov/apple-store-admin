@@ -15,9 +15,9 @@ export default function useServices() {
         description: undefined,
         image: undefined,
         title: undefined,
-        price: undefined
+        price: undefined,
+        preview: false
     })
-    const [preview, setPreview] = useState(null)
     const area = useRef(null)
 
     useEffect(() => {
@@ -41,8 +41,7 @@ export default function useServices() {
     };
 
     const previewImg = (e) => {
-        setPreview(URL.createObjectURL(e.target.files[0]))
-        setInput(prev => ({...prev, image: e.target.files[0]}))
+        setInput(prev => ({...prev, image: e.target.files[0], preview: URL.createObjectURL(e.target.files[0])}))
     }
 
     const validate = (value, name) => {
@@ -101,9 +100,10 @@ export default function useServices() {
             return Notice.Send({type: 'error', text: req.message})
         }
 
+        // URL.revokeObjectURL()
+        setInput(prev => ({...prev, title: '', description: '', price: '', image: false, preview: false}))
         Notice.Send({type: 'success', text: req.message})
         Store.setListener('newService', (req.data))
-        
     }
 
     return {
@@ -114,7 +114,6 @@ export default function useServices() {
         inputDescription,
         error, 
         input,
-        area,
-        preview
+        area
     }
 }

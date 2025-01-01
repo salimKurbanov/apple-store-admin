@@ -165,8 +165,7 @@
     
             .custom_arrows {
                 margin-top: 30px;
-                @include adaptiveProperty(padding-right, 100, 15);
-                @include adaptiveProperty(padding-left, 100, 15);
+                padding: 20px;
                 display: flex;
                 align-items: center;
                 gap: 20px;
