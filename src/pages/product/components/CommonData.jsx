@@ -2,11 +2,12 @@ import React from 'react';
 import Input from '../../../components/input/Input';
 import AddColor from './AddColor';
 
-const CommonData = ({commonData, inputCommonData}) => {
+const CommonData = ({commonData, inputCommonData, error , setError}) => {
 
     return (
         <div className="common_data">
             <Input 
+                error={error.name}
                 label={'название'} 
                 type={'text'} 
                 value={commonData.name} 
@@ -17,6 +18,7 @@ const CommonData = ({commonData, inputCommonData}) => {
             />
             
             <Input 
+                error={error.memory}
                 label={'объём памяти, ГБ'} 
                 type={'text'} 
                 value={commonData.memory} 
@@ -27,6 +29,7 @@ const CommonData = ({commonData, inputCommonData}) => {
             />
 
             <Input 
+                error={error.price}
                 label={'цена, $'} 
                 type={'text'} 
                 value={commonData.price} 
@@ -36,7 +39,7 @@ const CommonData = ({commonData, inputCommonData}) => {
                 mode={'full'}
             />
 
-            <AddColor commonData={commonData} inputCommonData={inputCommonData}/>
+            <AddColor setError={setError} errorColor={error.color} errorColorName={error.colorName} commonData={commonData} inputCommonData={inputCommonData}/>
         </div>
     );
 };

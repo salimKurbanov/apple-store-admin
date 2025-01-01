@@ -1,33 +1,40 @@
 import { useEffect, useRef, useState } from "react";
+import { initCnavasImage, makeColor, rgbToHex, toHex } from "../../../utils/Services";
 import Store from "../../../utils/Store";
 
 export default function useColorPicker () {
+    const [isOpen, setIsOpen] = useState(false)
     const canvasRef = useRef(null);
     const pointer = useRef(null)
     const [selectedColor, setSelectedColor] = useState('#FFFFFF');
     const [isBlock, setIsBlock] = useState(true)
     const [transparency, setTransparency] = useState(1)
-    const canvasWidth = 211;
+    const canvasWidth = 200;
     const canvasHeight = 127;
 
-    useEffect(() => {
-        const canvas = canvasRef.current;
-        const ctx = canvas.getContext('2d');
-    
-        const img = new Image();
-        img.src = 'images/color_picker.svg';
-        img.onload = function () {
-            ctx.drawImage(img, 0, 0, canvasWidth, canvasHeight);
-        };
+    Store.useListener('openColorPicker', () => {
+        setIsOpen(prev => prev = prev === true ? false : true)
+    })
 
-        window.addEventListener('mousemove', dragMove)
-        window.addEventListener('mouseup', dragEnd)
+    useEffect(() => {
+        if(isOpen) {
+            const image = 'images/color_picker.svg'
+
+            initCnavasImage(canvasRef, canvasWidth, canvasHeight, image)
+
+            window.addEventListener('click', closeColorPicker)
+            window.addEventListener('mousemove', dragMove)
+            window.addEventListener('mouseup', dragEnd)
+        }
 
         return () => {
+            window.removeEventListener('click', closeColorPicker)
             window.removeEventListener('mouseup', dragEnd)
             window.removeEventListener('mousemove', dragMove)
         }
-    }, [isBlock, selectedColor]);
+    }, [isOpen, isBlock, selectedColor]);
+
+    Store.useListener('sendColorToPicker', setSelectedColor)
 
     const changeTransparency = (e) => {
         e.stopPropagation()
@@ -62,11 +69,15 @@ export default function useColorPicker () {
         e.preventDefault()
 
         if(!isBlock) {
-            const pixel = makeColor(e)
-            
-            Store.setListener('sendColor', '#' + rgbToHex(pixel[0], pixel[1], pixel[2], transparency))
+            const pixel = makeColor(e, canvasRef, pointer)
 
-            setSelectedColor('#' + rgbToHex(pixel[0], pixel[1], pixel[2], transparency));
+            const color = '#' + rgbToHex(pixel[0], pixel[1], pixel[2], transparency)
+            
+            Store.setListener('sendColor', color)
+
+            setSelectedColor(color);
+
+            return
         }
 
         return
@@ -74,11 +85,14 @@ export default function useColorPicker () {
 
     const dragStart = (e) => {
         e.preventDefault()
-        const pixel = makeColor(e)
 
-        Store.setListener('sendColor', '#' + rgbToHex(pixel[0], pixel[1], pixel[2], transparency))
+        const pixel = makeColor(e, canvasRef, pointer)
 
-        setSelectedColor('#' + rgbToHex(pixel[0], pixel[1], pixel[2], transparency));
+        const color = '#' + rgbToHex(pixel[0], pixel[1], pixel[2], transparency)
+
+        Store.setListener('sendColor', color)
+
+        setSelectedColor(color);
 
         setIsBlock(false)
     }
@@ -89,40 +103,18 @@ export default function useColorPicker () {
         Store.setListener('sendColorToForm', selectedColor)
     }
 
-    const makeColor = (event) => {
-        const canvas = canvasRef.current;
-        const ctx = canvas.getContext('2d');
-        const rect = canvas.getBoundingClientRect();
-        let x = event.clientX - rect.left;
-        let y = event.clientY - rect.top;
-
-        if(x < 0) {
-            x = 0
-        } else if(x > 210) {
-            x = 210
-        } 
-
-        if(y < 0) {
-            y = 0
-        } else if (y > 126) {
-            y = 126
-        }
-
-        pointer.current.style.top = `${y}px`
-        pointer.current.style.left = `${x}px`
-
-        return ctx.getImageData(x, y, 1, 1).data;
+    const pipietteFunction = (e) => {
+        e.stopPropagation()
+        document.body.style.setProperty('cursor', 'url("/images/icons/pipette.svg"), auto', 'important')
+        Store.setListener('able_pipette', true)
     }
 
-    function rgbToHex(R,G,B,A) {return toHex(R) + toHex(G) + toHex(B) + (A < 1 ? toHex(Math.round(A * 255)) : '');}
-
-    function toHex(value) {
-        value = Math.max(0, Math.min(255, Math.round(value)));
-        
-        return value.toString(16).padStart(2, '0').toUpperCase();
+    const closeColorPicker = () => {
+        setIsOpen(false)
     }
 
     return {
+        isOpen,
         canvasWidth,
         canvasHeight,
         canvasRef,
@@ -134,5 +126,6 @@ export default function useColorPicker () {
         dragEnd,
         inputColor,
         changeTransparency,
+        pipietteFunction,
     }
 }

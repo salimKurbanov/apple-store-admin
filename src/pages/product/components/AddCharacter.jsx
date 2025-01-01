@@ -2,14 +2,16 @@ import React from 'react';
 import Cross from '../../../components/cross/Cross';
 import Store from '../../../utils/Store';
 
-const AddCharacter = () => {
+const AddCharacter = ({ error, setError }) => {
 
     const openModal = () => {
+        setError(prev => ({...prev, characters: false}))
+
         Store.setListener('open_character_modal', true)
     }
 
     return (
-        <div className='add_character_btn shadow' onMouseDown={openModal}>
+        <div className={`add_character_btn shadow ${error ? 'error' : ''}`} onMouseDown={openModal}>
             <Cross />
         </div>
     );

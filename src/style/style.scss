@@ -7,7 +7,8 @@
     --background: #fff;
     --main-font: "Montserrat", serif;
     --grey: #DFE2EB;
-    --red: red;
+    --red: #ff9c9c;
+    --ultra-red: #db2c2c;
     --blue: #2397FE;
 }
 
@@ -125,7 +126,7 @@ input {
     padding: 10px 10px;
     box-shadow: 0 0 20px 0 rgba(110, 110, 110, 0.25);
     font-size: 16px;}
-.notice .error {background-color: var(--red);color: var(--white)}
+.notice .error {background-color: var(--red);color: var(--black); font-weight: 500;}
 .notice .success {background-color: var(--blue);color: var(--white);}
 .notice .remark {color:#FF9800;}
 

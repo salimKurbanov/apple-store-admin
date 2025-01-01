@@ -2,7 +2,7 @@ import React from 'react';
 import AddCharacter from './AddCharacter';
 import CharacterItem from './CharacterItem';
 
-const Characters = ({ changeCharacterDescription, changeCharacterIcon, deleteCharacter, list }) => {
+const Characters = ({ setError, changeCharacterDescription, changeCharacterIcon, deleteCharacter, list, error }) => {
     return (
         <div className='characters'>
             <h4>характеристики</h4>
@@ -11,17 +11,18 @@ const Characters = ({ changeCharacterDescription, changeCharacterIcon, deleteCha
             <>
                 {list.map(el => (
                     <CharacterItem
-                    el={el} 
-                    key={el.imageName} 
-                    deleteCharacter={deleteCharacter}
-                    changeCharacterIcon={changeCharacterIcon}
-                    changeCharacterDescription={changeCharacterDescription}
-                />
+                        error={error}
+                        el={el} 
+                        key={el.imageName} 
+                        deleteCharacter={deleteCharacter}
+                        changeCharacterIcon={changeCharacterIcon}
+                        changeCharacterDescription={changeCharacterDescription}
+                    />
                 ))}
             </>
             : <></>}
             
-            {list?.length < 4 ? <AddCharacter />:<></>}
+            {list?.length < 4 ? <AddCharacter setError={setError} error={error} />:<></>}
         </div>
     );
 };
