@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react"
 import Api from "../../../utils/Api"
-import Notice from "../../../components/notice/Notice"
 import Store from "../../../utils/Store"
 
 
@@ -12,10 +11,10 @@ export default function useServices() {
         price: false
     })
     const [input, setInput] = useState({
-        description: undefined,
-        image: undefined,
-        title: undefined,
-        price: undefined,
+        description: '',
+        image: '',
+        title: '',
+        price: '',
         preview: false
     })
     const area = useRef(null)
@@ -84,7 +83,7 @@ export default function useServices() {
         e.preventDefault()
 
         if(error.description || error.price || error.title || !input.image || !input.title || !input.price || !input.description) {
-            Notice.Send({type: 'error', text: 'Заполните правильно все поля'})
+            Store.setListener('notice', {type: 'error', text: 'Заполните правильно все поля'})
             return
         }
 
@@ -97,12 +96,12 @@ export default function useServices() {
         let req = await Api.postFormData('api/services/create', data)
 
         if(req === 'error') {
-            return Notice.Send({type: 'error', text: req.message})
+            Store.setListener('notice', {type: 'error', text: req.message})
+            return 
         }
 
-        // URL.revokeObjectURL()
         setInput(prev => ({...prev, title: '', description: '', price: '', image: false, preview: false}))
-        Notice.Send({type: 'success', text: req.message})
+        Store.setListener('notice', {type: 'success', text: req.message})
         Store.setListener('newService', (req.data))
     }
 

@@ -1,0 +1,49 @@
+@import './../../../style/common';
+
+.notification {
+    position: fixed;
+    bottom: 50px;
+    right: 0;
+    z-index: 300;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    .item {
+        position: relative;
+        max-width: 300px;
+        width: 100%;
+        transform: translateX(100%);
+        padding: 10px;
+        border-top-left-radius: 15px;
+        border-bottom-left-radius: 15px;
+        animation: OpenNotification 0.5s forwards;
+        color: var(--white);
+        &.error {
+            background-color: var(--red);
+        }
+        &.success {
+            background-color: var(--blue);
+        }
+        &.close {
+            animation: CloseNotification 0.5s forwards;
+        }
+    }
+}
+
+@keyframes OpenNotification {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+@keyframes CloseNotification {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
