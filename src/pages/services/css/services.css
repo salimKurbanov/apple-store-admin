@@ -231,29 +231,10 @@
 }
 .services .services_panel .price_list .custom_arrows {
   margin-top: 30px;
+  padding: 20px;
   display: flex;
   align-items: center;
   gap: 20px;
-}
-@media (max-width: 768px) {
-  .services .services_panel .price_list .custom_arrows {
-    padding-right: calc(15px + 144.5 * (100vw - 320px) / 1920);
-  }
-}
-@media (min-width: 768px) {
-  .services .services_panel .price_list .custom_arrows {
-    padding-right: calc(15px + 85 * 0.0520833333vw);
-  }
-}
-@media (max-width: 768px) {
-  .services .services_panel .price_list .custom_arrows {
-    padding-left: calc(15px + 144.5 * (100vw - 320px) / 1920);
-  }
-}
-@media (min-width: 768px) {
-  .services .services_panel .price_list .custom_arrows {
-    padding-left: calc(15px + 85 * 0.0520833333vw);
-  }
 }
 .services .services_panel .price_list .custom_arrows .custom_arrow {
   border-radius: 50%;

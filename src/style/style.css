@@ -149,17 +149,18 @@ input {
   width: 100%;
   max-width: 300px;
   position: fixed;
-  bottom: 0px;
-  left: 50%;
+  bottom: 50px;
+  right: 0;
   z-index: 300;
-  transform: translateX(-50%);
+  transform: translateX(100%);
 }
 
 .notice .item {
   display: block;
   text-align: center;
   width: 100%;
-  border-radius: 15px;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
   background: rgba(33, 32, 32, 0.9215686275);
   will-change: transform;
   overflow: hidden;
@@ -187,7 +188,7 @@ input {
 [status=show] {
   opacity: 1; /*Элемент полностью прозрачный (невидимый)*/
   transition: 1s; /*Скорость перехода состояния элемента*/
-  animation: show-notice 0.5s 1; /* Указываем название анимации, её время и количество повторов*/
+  animation: show-notice 0.8s 1; /* Указываем название анимации, её время и количество повторов*/
   animation-fill-mode: forwards; /* Чтобы элемент оставался в конечном состоянии анимации */
   /*animation-delay: 1s; /* Задержка перед началом */
 }
@@ -195,25 +196,25 @@ input {
 [status=hide] {
   opacity: 1; /*Элемент полностью прозрачный (невидимый)*/
   transition: 1s; /*Скорость перехода состояния элемента*/
-  animation: hide-notice 0.5s 1; /* Указываем название анимации, её время и количество повторов*/
+  animation: hide-notice 0.8s 1; /* Указываем название анимации, её время и количество повторов*/
   animation-fill-mode: forwards; /* Чтобы элемент оставался в конечном состоянии анимации */
   /*animation-delay: 1s; /* Задержка перед началом */
 }
 
 @keyframes show-notice {
   0% {
-    transform: translateY(200%);
+    transform: translateX(100%);
   }
   100% {
-    transform: translateY(-100%);
+    transform: translateX(-100%);
   }
 }
 @keyframes hide-notice {
   0% {
-    transform: translateY(-100%);
+    transform: translateX(-100%);
   }
   100% {
-    transform: translateY(200%);
+    transform: translateX(100%);
   }
 }
 @keyframes Open {
