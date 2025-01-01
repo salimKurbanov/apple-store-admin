@@ -10,6 +10,7 @@ import AddCharacterModal from './modal/add_characters/AddCharacterModal';
 import Headers from './components/headers/Headers';
 import Notice from './components/notice/Notice';
 import Services from './pages/services/Services';
+import Notification from './components/notification/Notification';
 
 
 const App = () => {
@@ -39,6 +40,7 @@ const App = () => {
       </div>}
 
       <Notice.Init />
+      <Notification />
     </>
   );
 };

@@ -50,6 +50,7 @@ const List = () => {
         let req = await Api.delete(`api/services/delete/${id}`)
 
         if(req !== 'error') {
+            Store.setListener('notice', {type: 'success', text: 'Услуга удалена'})
             return setList(prev => prev.filter(el => el.servicesid !== id))
         }
 
