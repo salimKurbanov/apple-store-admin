@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import DeleteButton from '../../../components/delete_button/DeleteButton';
 
-const CharacterItem = ({el, deleteCharacter, changeCharacterIcon, changeCharacterDescription}) => {
+const CharacterItem = ({el, deleteCharacter, changeCharacterIcon, changeCharacterDescription, error}) => {
 
     const area = useRef(null)
 
@@ -20,7 +20,7 @@ const CharacterItem = ({el, deleteCharacter, changeCharacterIcon, changeCharacte
 
     return (
         <div className='character_item'>
-            <label className='character_icon shadow' htmlFor={el.imageName}>
+            <label className={`character_icon shadow ${error ? 'error' : ''}`} htmlFor={el.imageName}>
                 <img src={URL.createObjectURL(el.file)} alt="" />
                 <input 
                     id={el.imageName} 
@@ -29,7 +29,7 @@ const CharacterItem = ({el, deleteCharacter, changeCharacterIcon, changeCharacte
                 />
             </label>
 
-            <div className="description_container shadow">
+            <div className={`description_container shadow ${error ? 'error' : ''}`}>
                 <textarea ref={area} className='description' value={el.description} onChange={(e) => changeCharacterDescription(e, el.imageName)}></textarea>
 
                 <DeleteButton callback={() => deleteCharacter(el.imageName)}/>

@@ -1,27 +1,49 @@
 @charset "UTF-8";
 /*-------------Миксины----------------*/
 .color_picker {
+  position: absolute;
+  top: -230px;
+  left: calc(100% + 10px);
   width: 250px;
+  max-width: 250px;
   background-color: var(--white);
   border-radius: 15px;
+  padding: 25px;
   display: flex;
   flex-direction: column;
   gap: 20px;
+  animation: Open 0.5s forwards;
 }
-@media (max-width: 768px) {
+@media screen and (max-width: 400px) {
   .color_picker {
-    padding: calc(10px + 25.5 * (100vw - 320px) / 1920);
+    top: unset;
+    bottom: calc(100% + 20px);
+    left: 0;
   }
 }
-@media (min-width: 768px) {
-  .color_picker {
-    padding: calc(10px + 15 * 0.0520833333vw);
-  }
+.color_picker .header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-.color_picker h2 {
+.color_picker .header h2 {
   font-weight: 600;
   font-size: 18px;
   color: var(--black);
+}
+.color_picker .header .piepette {
+  width: 25px;
+  height: 25px;
+  border-radius: 5px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s;
+}
+.color_picker .header .piepette:hover {
+  background-color: var(--grey);
 }
 .color_picker .input_field input {
   text-transform: uppercase;

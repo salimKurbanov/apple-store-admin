@@ -1,12 +1,17 @@
+import useStoreList from "../hooks/useStoreList";
 import StoreItem from "./StoreItem";
 
 export default function StoreList () {
+    const store = useStoreList()
 
     return (
         <div className="store_list">
-            <StoreItem />
-            <StoreItem />
-            <StoreItem />
+            {store?.list?.length ? 
+                store.list.map((el) => (
+                    <StoreItem el={el} key={el.productid} dollar={store.dollar}/>
+                ))
+            :
+            <></>}
         </div>
     )
 }

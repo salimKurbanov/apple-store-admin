@@ -1,17 +1,19 @@
 'use client'
+import Api from "../../../utils/Api";
 import ItemOption from "./ItemOption";
 
-export default function StoreItem () {
+export default function StoreItem ({el, dollar}) {
+    const price = ((dollar * el.price) / 100).toFixed(2)
 
     return (
         <div className="store_item shadow">
-            <img className="store_item_image" src="/images/iphone_16_pro.svg" alt="" />
+            <img className="store_item_image" src={`${Api.url}images/products/${el.main_image}`} alt="" />
 
             <div className="store_item_content">
                 <div className="head">
-                    <div className="name">iPhone 16</div>
+                    <div className="name">{el.title}</div>
 
-                    <div className="price">70 000 руб.</div>
+                    <div className="price">{price} руб.</div>
                 </div>
 
                 <div className="option_list">

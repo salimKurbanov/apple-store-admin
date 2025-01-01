@@ -10,6 +10,9 @@
   gap: 30px;
   margin-bottom: 30px;
 }
+.product .producct_form .data_container *.error {
+  background-color: var(--red) !important;
+}
 .product .producct_form .data_container h4 {
   white-space: nowrap;
   text-transform: lowercase;
@@ -31,6 +34,7 @@
   max-width: 230px;
 }
 .product .producct_form .data_container .image_wrapper .image_container {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -38,7 +42,7 @@
   border-radius: 15px;
   background-color: var(--grey);
   min-height: 300px;
-  cursor: pointer;
+  transition: background-color 0.3s;
 }
 .product .producct_form .data_container .image_wrapper .image_container input {
   height: 0;
@@ -46,6 +50,16 @@
 }
 .product .producct_form .data_container .image_wrapper .image_container img {
   width: 100%;
+}
+.product .producct_form .data_container .image_wrapper .image_container canvas {
+  width: 100%;
+  height: 100%;
+}
+.product .producct_form .data_container .image_wrapper .image_container .cross {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .product .producct_form .data_container .common_data {
   flex: 1;
@@ -60,7 +74,10 @@
   gap: 15px;
   width: 100%;
 }
-.product .producct_form .data_container .common_data .color_flex .add_color_btn {
+.product .producct_form .data_container .common_data .color_flex .add_color_btn_wrapper {
+  position: relative;
+}
+.product .producct_form .data_container .common_data .color_flex .add_color_btn_wrapper .add_color_btn {
   width: 45px;
   height: 45px;
   flex-shrink: 0;
@@ -90,6 +107,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: background-color 0.3s;
   cursor: pointer;
 }
 .product .producct_form .data_container .characters .character_item {
@@ -108,6 +126,7 @@
   cursor: pointer;
   background-color: var(--grey);
   border-radius: 10px;
+  transition: background-color 0.3s;
 }
 .product .producct_form .data_container .characters .character_item .character_icon input {
   height: 0;
@@ -122,6 +141,7 @@
   height: max-content;
   padding: 12px 15px;
   display: flex;
+  transition: background-color 0.3s;
   gap: 10px;
 }
 .product .producct_form .data_container .characters .character_item .description {

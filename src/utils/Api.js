@@ -61,7 +61,7 @@ Api.get = async (path) => {
 
 }
 
-Api.postFormData = async (path, data) => {
+Api.postFormData = async (data, path) => {
 
     try {
         let res = await fetch(`${Api.url}${path}`, {

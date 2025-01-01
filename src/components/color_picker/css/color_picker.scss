@@ -1,18 +1,54 @@
 @import './../../../style/common';
 
 .color_picker {
+    position: absolute;
+    top: -230px;
+    left: calc(100% + 10px);
     width: 250px;
+    max-width: 250px;
     background-color: var(--white);
     border-radius: 15px;
-    @include adaptiveProperty(padding, 25, 10);
+    padding: 25px;
     display: flex;
     flex-direction: column;
     gap: 20px;
+    animation: Open 0.5s forwards;
 
-    & h2 {
-        font-weight: 600;
-        font-size: 18px;
-        color: var(--black);
+    @include mediaMaxWidth(400) {
+        top: unset;
+        bottom: calc(100% + 20px);
+        left: 0;
+    }
+
+    .header {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        & h2 {
+            font-weight: 600;
+            font-size: 18px;
+            color: var(--black);
+        }
+
+        .piepette {
+            width: 25px;
+            height: 25px;
+            border-radius: 5px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+            // cursor: pointer;
+
+            @include mediaMinWidth(992) {
+            }
+            &:hover {
+                background-color: var(--grey);
+            }
+        }
     }
 
     & .input_field input{
