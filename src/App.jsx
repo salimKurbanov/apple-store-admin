@@ -11,6 +11,7 @@ import Headers from './components/headers/Headers';
 import Notice from './components/notice/Notice';
 import Services from './pages/services/Services';
 import Notification from './components/notification/Notification';
+import EditProductModal from './modal/edit_product/EditProductModal';
 
 
 const App = () => {
@@ -37,6 +38,7 @@ const App = () => {
         </Router>
 
         <AddCharacterModal />
+        <EditProductModal />
       </div>}
 
       <Notice.Init />

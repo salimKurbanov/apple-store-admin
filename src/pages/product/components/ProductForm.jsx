@@ -13,12 +13,13 @@ const ProductForm = () => {
         <form className='producct_form'>
             <div className="data_container">
                 <ImageContainer
+                    id={'product_image'}
                     error={product.error.image}
                     imageRef={product.imageRef}
                     image={product.image} 
                     addImage={product.addImage}
                     pipette={product.pipette}
-                    pipietteFunction={product.pipietteFunction  }
+                    pipietteFunction={product.pipietteFunction}
                 />
 
                 <CommonData 
@@ -38,7 +39,14 @@ const ProductForm = () => {
                 />
             </div>
 
-            <Button callback={product.addNewProduct} mode={'black'}>Добавить</Button>
+           
+            <Button callback={product.addNewProduct} mode={'black'}>
+                {product?.loading ? 
+                    "Загрузка..."
+                : 
+                    'Добавить'
+                }
+            </Button>
         </form>
     );
 };

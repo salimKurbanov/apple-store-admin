@@ -1,27 +1,31 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Cross from '../../../components/cross/Cross';
+import ColorPicker from '../../../components/color_picker/ColorPicker';
 import Store from '../../../utils/Store';
-import ColorPicker from '../../../components/color_picker/ColorPicker'
 
-const AddColorBtn = ({error, setError}) => {
+const AddColorBtn = ({outColor, error, setError}) => {
     const [color, setColor] = useState(false)
     const keys = {
-        openModal: 'openColorPicker',
-        sendColor: 'sendColor',
-        sendColorToPicker: 'sendColorToPicker',
-        sendColorToForm: 'sendColorToForm',
-        able_pipette: 'able_pipette'
+        openModal: 'openEditColorPicker',
+        sendColor: 'editColor',
+        sendColorToPicker: 'editColorToPicker',
+        sendColorToForm: 'editColorToForm',
+        able_pipette: 'able_edit_pipette'
     }
 
-    Store.useListener('sendColor', (data) => {
+    Store.useListener('editColor', (data) => {
         setColor(data)
     })
 
     const openColorPicker = (e) => {
         e.stopPropagation()
         setError(prev => ({...prev, color: false}))
-        Store.setListener('openColorPicker', true)
+        Store.setListener('openEditColorPicker', true)
     }
+
+    useEffect(() => {
+        setColor(outColor)
+    }, [])
 
     return (
         <div className="add_color_btn_wrapper">

@@ -10,7 +10,7 @@ const AddIcon = ({error, file, callback}) => {
                 <Cross />
             }
 
-            <input id='character_icon' type="file" onChange={(e) => callback(e)}/>
+            <input id='character_icon' value={''} type="file" onChange={(e) => callback(e)}/>
         </label>
     );
 };

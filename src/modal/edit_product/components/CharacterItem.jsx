@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import DeleteButton from '../../../components/delete_button/DeleteButton';
+import Api from '../../../utils/Api';
 
 const CharacterItem = ({el, deleteCharacter, changeCharacterIcon, changeCharacterDescription, error}) => {
-
     const area = useRef(null)
 
     useEffect(() => {
@@ -21,7 +21,7 @@ const CharacterItem = ({el, deleteCharacter, changeCharacterIcon, changeCharacte
     return (
         <div className='character_item'>
             <label className={`character_icon shadow ${error ? 'error' : ''}`} htmlFor={el.imageName}>
-                <img src={URL.createObjectURL(el.file)} alt="" />
+                <img src={el.file instanceof File ? URL.createObjectURL(el.file) : `${Api.url}images/products/${el.imageName}`} alt="" />
                 <input 
                     value={''}
                     id={el.imageName} 

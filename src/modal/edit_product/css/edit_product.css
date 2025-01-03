@@ -1,0 +1,205 @@
+@charset "UTF-8";
+/*-------------Миксины----------------*/
+.edit_product_modal_wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  -webkit-backdrop-filter: blur(7px);
+          backdrop-filter: blur(7px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: Open 0.7s forwards;
+}
+.edit_product_modal_wrapper .edit_product_modal {
+  padding: 20px 25px;
+  background-color: var(--white);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 1000px;
+}
+.edit_product_modal_wrapper .edit_product_modal h2 {
+  color: var(--black);
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+@media (max-width: 768px) {
+  .edit_product_modal_wrapper .edit_product_modal h2 {
+    font-size: calc(16px + 3.4 * (100vw - 320px) / 1920);
+  }
+}
+@media (min-width: 768px) {
+  .edit_product_modal_wrapper .edit_product_modal h2 {
+    font-size: calc(16px + 2 * 0.0520833333vw);
+  }
+}
+.edit_product_modal_wrapper .edit_product_modal .producct_form .data_container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+.edit_product_modal_wrapper .edit_product_modal .producct_form .data_container h4 {
+  white-space: nowrap;
+  text-transform: lowercase;
+  color: var(--black);
+  margin-bottom: 3.5px;
+}
+@media (max-width: 768px) {
+  .edit_product_modal_wrapper .edit_product_modal .producct_form .data_container h4 {
+    font-size: calc(14px + 3.4 * (100vw - 320px) / 1920);
+  }
+}
+@media (min-width: 768px) {
+  .edit_product_modal_wrapper .edit_product_modal .producct_form .data_container h4 {
+    font-size: calc(14px + 2 * 0.0520833333vw);
+  }
+}
+.edit_product_modal_wrapper .edit_product_modal .producct_form .data_container .image_wrapper {
+  width: 100%;
+  max-width: 230px;
+}
+.edit_product_modal_wrapper .edit_product_modal .producct_form .data_container .image_wrapper .image_container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 15px;
+  min-height: 300px;
+  transition: background-color 0.3s;
+}
+.edit_product_modal_wrapper .edit_product_modal .producct_form .data_container .image_wrapper .image_container.error {
+  background-color: var(--error) !important;
+}
+.edit_product_modal_wrapper .edit_product_modal .producct_form .data_container .image_wrapper .image_container input {
+  height: 0;
+  width: 0;
+}
+.edit_product_modal_wrapper .edit_product_modal .producct_form .data_container .image_wrapper .image_container img {
+  width: 100%;
+}
+.edit_product_modal_wrapper .edit_product_modal .producct_form .data_container .image_wrapper .image_container canvas {
+  width: 100%;
+  height: 100%;
+}
+.edit_product_modal_wrapper .edit_product_modal .producct_form .data_container .image_wrapper .image_container .cross {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.edit_product_modal_wrapper .edit_product_modal .producct_form .data_container .common_data {
+  flex: 1;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.edit_product_modal_wrapper .edit_product_modal .producct_form .data_container .common_data .color_flex {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  width: 100%;
+}
+.edit_product_modal_wrapper .edit_product_modal .producct_form .data_container .common_data .color_flex .add_color_btn_wrapper {
+  position: relative;
+}
+.edit_product_modal_wrapper .edit_product_modal .producct_form .data_container .common_data .color_flex .add_color_btn_wrapper .add_color_btn {
+  width: 45px;
+  height: 45px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.1s;
+  cursor: pointer;
+}
+.edit_product_modal_wrapper .edit_product_modal .producct_form .data_container .common_data .color_flex .add_color_btn_wrapper .add_color_btn.error {
+  background-color: var(--error) !important;
+}
+.edit_product_modal_wrapper .edit_product_modal .producct_form .data_container .common_data .color_flex .input_field {
+  min-width: 0;
+  flex: 1;
+}
+.edit_product_modal_wrapper .edit_product_modal .producct_form .data_container .common_data .color_flex .input_field .label {
+  margin: 0;
+}
+.edit_product_modal_wrapper .edit_product_modal .producct_form .data_container .common_data .color_flex .input_field input {
+  min-width: 0 !important;
+  max-width: 100%;
+}
+.edit_product_modal_wrapper .edit_product_modal .producct_form .data_container .characters .add_character_btn {
+  height: 45px;
+  width: 45px;
+  border-radius: 10px;
+  background-color: var(--grey);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
+  cursor: pointer;
+}
+.edit_product_modal_wrapper .edit_product_modal .producct_form .data_container .characters .add_character_btn.error {
+  background-color: var(--error) !important;
+}
+.edit_product_modal_wrapper .edit_product_modal .producct_form .data_container .characters .character_item {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+.edit_product_modal_wrapper .edit_product_modal .producct_form .data_container .characters .character_item .character_icon {
+  height: 45px;
+  width: 45px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: var(--grey);
+  border-radius: 10px;
+  transition: background-color 0.3s;
+}
+.edit_product_modal_wrapper .edit_product_modal .producct_form .data_container .characters .character_item .character_icon.error {
+  background-color: var(--error) !important;
+}
+.edit_product_modal_wrapper .edit_product_modal .producct_form .data_container .characters .character_item .character_icon img {
+  max-width: 100%;
+}
+.edit_product_modal_wrapper .edit_product_modal .producct_form .data_container .characters .character_item .character_icon input {
+  height: 0;
+  width: 0;
+}
+.edit_product_modal_wrapper .edit_product_modal .producct_form .data_container .characters .character_item .description_container {
+  background-color: var(--grey);
+  width: 250px;
+  flex-shrink: 0;
+  border-radius: 15px;
+  height: -moz-max-content;
+  height: max-content;
+  padding: 12px 15px;
+  display: flex;
+  transition: background-color 0.3s;
+  gap: 10px;
+}
+.edit_product_modal_wrapper .edit_product_modal .producct_form .data_container .characters .character_item .description_container.error {
+  background-color: var(--error) !important;
+}
+.edit_product_modal_wrapper .edit_product_modal .producct_form .data_container .characters .character_item .description_container .delete_btn {
+  width: 20px;
+  height: 20px;
+}
+.edit_product_modal_wrapper .edit_product_modal .producct_form .data_container .characters .character_item .description {
+  flex: 1;
+  background-color: transparent;
+  font-size: 14px;
+  height: 45px;
+  resize: none;
+  overflow: hidden;
+}/*# sourceMappingURL=edit_product.css.map */

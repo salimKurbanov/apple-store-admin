@@ -3,14 +3,14 @@ import './css/color_picker.css';
 import useColorPicker from './hooks/useColorPicker';
 import Input from '../input/Input';
 
-const ColorPicker = () => {
+const ColorPicker = ({keys}) => {
 
-    const color = useColorPicker()
+    const color = useColorPicker(keys)
 
     if(!color.isOpen) return null
 
     return (
-        <div className="color_picker shadow" onClick={(e) => e.stopPropagation()}>
+        <div className="color_picker shadow" onMouseDown={(e) => e.stopPropagation()}>
             <div className="header">
                 <h2>Выберите цвет</h2>
 
@@ -57,8 +57,6 @@ const ColorPicker = () => {
                 type={'text'} 
                 value={color.selectedColor} 
                 onChange={color.inputColor} 
-                onBlur={''}
-                placeholder={''} 
                 mode={'full'}
             />
         </div>

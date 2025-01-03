@@ -12,10 +12,6 @@
             gap: 30px;
             margin-bottom: 30px;
 
-            *.error {
-                background-color: var(--red) !important;
-            }
-
             & h4 {
                 white-space: nowrap;
                 @include adaptiveFont(16, 14);
@@ -35,9 +31,13 @@
                     justify-content: center;
                     flex-shrink: 0;
                     border-radius: 15px;
-                    background-color: var(--grey);
+                    // background-color: var(--grey);
                     min-height: 300px;
                     transition: background-color 0.3s;
+
+                    &.error {
+                        background-color: var(--error) !important;
+                    }
     
                     & input {
                         height: 0;
@@ -71,7 +71,7 @@
                 
                 .color_flex {
                     display: flex;
-                    align-items: center;
+                    align-items: flex-start;
                     gap: 15px;
                     width: 100%;
 
@@ -89,6 +89,10 @@
                             // background-color: var(--grey);
                             transition: 0.1s;
                             cursor: pointer;
+
+                            &.error {
+                                background-color: var(--error) !important;
+                            }
                         }
                     }
 
@@ -119,6 +123,10 @@
                     justify-content: center;
                     transition: background-color 0.3s;
                     cursor: pointer;
+
+                    &.error {
+                        background-color: var(--error) !important;
+                    }
                 }
 
                 .character_item {
@@ -138,6 +146,14 @@
                         background-color: var(--grey);
                         border-radius: 10px;
                         transition: background-color 0.3s;
+
+                        &.error {
+                            background-color: var(--error) !important;
+                        }
+
+                        & img {
+                            max-width: 100%;
+                        }
         
                         & input {
                             height: 0;
@@ -155,6 +171,15 @@
                         display: flex;
                         transition: background-color 0.3s;
                         gap: 10px;
+
+                        &.error {
+                            background-color: var(--error) !important;
+                        }
+
+                        & .delete_btn {
+                            width: 20px;
+                            height: 20px;
+                        }
                     }
 
                     .description {
@@ -178,13 +203,14 @@
         margin-top: 70px;
 
         @include mediaMaxWidth(1500) {
-            grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
         }
-        @include mediaMaxWidth(600) {
+        @include mediaMaxWidth(500) {
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
         }
 
         .store_item {
+            position: relative;
             display: flex;
             align-items: flex-start;
             justify-content: center;
@@ -193,7 +219,20 @@
             gap: 45px;
             background-color: var(--white);
             border-radius: 20px;
+            transition: opacity 0.4s;
             @include adaptiveProperty(padding, 50, 20);
+
+            &.loading {
+                opacity: 0.6;
+            }
+
+            .manage_flex {
+                position: absolute;
+                top: 15px;
+                right: 15px;
+                display: flex;
+                gap: 5px;
+            }
             
             & .store_item_image {
                 width: 100%;
