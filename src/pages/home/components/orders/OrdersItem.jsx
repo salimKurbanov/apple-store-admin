@@ -1,24 +1,11 @@
 import React from 'react';
 import Button from '../../../../components/button/Button';
 import Api from '../../../../utils/Api';
+import { formatDate } from '../../../../utils/Services';
 
 const OrdersItem = ({mode, el, callback}) => {
 
-      function formatDate(isoDate) {
-        const date = new Date(isoDate);
-      
-        if (isNaN(date.getTime())) {
-          throw new Error("Invalid date format");
-        }
-      
-        const day = date.getDate().toString().padStart(2, '0');
-        const month = (date.getMonth() + 1).toString().padStart(2, '0'); 
-        const year = date.getFullYear();
-        const hours = date.getHours().toString().padStart(2, '0');
-        const minutes = date.getMinutes().toString().padStart(2, '0');
-      
-        return `${day}.${month}.${year} ${hours}:${minutes}`;
-      }
+    
     
     return (
         <div className={`order_list_item shadow ${mode}`}>

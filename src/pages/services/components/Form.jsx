@@ -12,7 +12,7 @@ const Form = () => {
         <form action="">
             <Input value={services.input.title} onChange={(e) => services.change(e, 'title')} label={'название'} mode={`full`} error={services.error.title}/>
             <TextArea onChange={services.inputDescription} refCurrent={services.area} error={services.error.description} label={'описание'} mode={'full'} value={services.input.description}/>
-            <Input value={services.input.price} onChange={(e) => services.change(e, 'price')} label={'цена'} mode={`full`} error={services.error.price}/>
+            <Input value={services.input.price} onChange={(e) => services.change(e, 'price')} label={'цена, руб.'} mode={`full`} error={services.error.price}/>
 
             <div className="icon">
                 <h3>иконка</h3>

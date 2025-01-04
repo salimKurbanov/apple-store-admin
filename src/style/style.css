@@ -128,11 +128,11 @@ input {
   min-height: 100dvh;
   margin-right: auto;
   gap: 10px;
-  padding: 131px 20px 10px 151px;
+  padding: 131px 20px 100px 151px;
 }
 @media screen and (max-width: 991px) {
   .main_wrapper {
-    padding: 131px 10px 10px 10px;
+    padding: 131px 10px 50px 10px;
   }
 }
 
@@ -143,6 +143,20 @@ input {
 
 .shadow {
   box-shadow: 0 0 20px 0 rgba(110, 110, 110, 0.25);
+}
+
+.title {
+  font-weight: 500;
+}
+@media (max-width: 768px) {
+  .title {
+    font-size: calc(20px + 6.8 * (100vw - 320px) / 1920);
+  }
+}
+@media (min-width: 768px) {
+  .title {
+    font-size: calc(20px + 4 * 0.0520833333vw);
+  }
 }
 
 /*----------- Notice -------------*/
