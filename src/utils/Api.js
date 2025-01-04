@@ -112,6 +112,30 @@ Api.putFormData = async (data, path) => {
 
 }
 
+Api.putFormData = async (data, path) => {
+
+    try {
+        let res = await fetch(`${Api.url}${path}`, {
+            method: 'PUT',
+            body: data,
+            headers: {
+                ssid: localStorage.getItem('accessToken')
+            }
+        })
+
+        res = await res.json()
+
+        if(res.status === 401) {
+            return Api.logout()
+        }
+
+        return res
+    } catch(e) {
+        return 'error'
+    }
+
+}
+
 Api.delete = async (path) => {
     try {
 

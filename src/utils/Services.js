@@ -41,13 +41,20 @@ export function getColor(event, ref) {
     return ctx.getImageData(x, y, 1, 1).data;
 }
 
-export function initCnavasImage (ref, width, height, image) {
+export function initCnavasImage (ref, width, image, height) {
     const canvas = ref.current;
     const ctx = canvas.getContext('2d', { willReadFrequently: true });
 
     const img = new Image();
     img.src = image;
-    img.onload = function () {
+    img.onload = function () { 
+        if(!height) {
+            const imgWidth = img.naturalWidth;
+            const imgHeight = img.naturalHeight;
+            height = (width / imgWidth) * imgHeight;
+            canvas.height = height;
+        }
+
         ctx.drawImage(img, 0, 0, width, height);
     };
 }
@@ -64,7 +71,15 @@ export function validateFields (data) {
 
 export function validateArray (array) {
     return array.some(item => {
-        return !item.file || !item.description || !item.imageName;
+        return !item.file || !item.description
+    });
+};
+export function validateCharactersArray (array) {
+    return array.some(item => {
+        if(item.new) {
+            return !item.file || !item.description
+        }
+        return !item.icon || !item.description
     });
 };
 

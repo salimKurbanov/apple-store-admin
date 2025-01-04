@@ -1,13 +1,12 @@
 import React from 'react';
-import Cross from '../../../components/cross/Cross';
 import Store from '../../../utils/Store';
+import Cross from '../../../components/cross/Cross';
 
-const AddCharacter = ({ error, setError }) => {
-
+const AddCharacter = ({error, setError}) => {
     const openModal = () => {
         setError(prev => ({...prev, characters: false}))
 
-        Store.setListener('open_character_modal', 'add_new_character')
+        Store.setListener('open_character_modal', 'edit_new_character')
     }
 
     return (

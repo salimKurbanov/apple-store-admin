@@ -1,8 +1,8 @@
 import React from 'react';
-import AddCharacter from './AddCharacter';
 import CharacterItem from './CharacterItem';
+import AddCharacter from './AddCharacter';
 
-const Characters = ({ setError, changeCharacterDescription, changeCharacterIcon, deleteCharacter, list, error }) => {
+const Characters = ({setError, changeCharacterDescription, changeCharacterIcon, deleteCharacter, list, error}) => {
     return (
         <div className='characters'>
             <h4>характеристики</h4>
@@ -13,7 +13,7 @@ const Characters = ({ setError, changeCharacterDescription, changeCharacterIcon,
                     <CharacterItem
                         error={error}
                         el={el} 
-                        key={el.id} 
+                        key={el.id || el.specificationsid}
                         deleteCharacter={deleteCharacter}
                         changeCharacterIcon={changeCharacterIcon}
                         changeCharacterDescription={changeCharacterDescription}

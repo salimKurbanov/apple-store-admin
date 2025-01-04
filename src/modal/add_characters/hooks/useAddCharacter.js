@@ -10,14 +10,18 @@ export default function useAddCharacter () {
     const [newItem, setNewItem] = useState({
         file: false,
         description: '',
-        imageName: crypto.randomUUID(),
     })
+    const [key, setKey] = useState('')
 
     const area = useRef(null)
 
-    Store.useListener('open_character_modal', setIsOpen)
+    Store.useListener('open_character_modal', (data) => {
+        setKey(data)
+        setIsOpen(true)
+    })
 
     const closeModal = () => {
+        
         setIsOpen(false)
         setError({
             icon: false,
@@ -26,7 +30,6 @@ export default function useAddCharacter () {
         setNewItem({
             file: false,
             description: '',
-            imageName: crypto.randomUUID(),
         })
     }
 
@@ -63,7 +66,7 @@ export default function useAddCharacter () {
             return
         }
 
-        Store.setListener('add_new_character', newItem)
+        Store.setListener(key, ({...newItem, id: crypto.randomUUID()}))
         closeModal()
     }
 
