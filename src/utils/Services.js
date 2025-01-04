@@ -71,6 +71,14 @@ export function validateFields (data) {
 
 export function validateArray (array) {
     return array.some(item => {
+        return !item.file || !item.description
+    });
+};
+export function validateCharactersArray (array) {
+    return array.some(item => {
+        if(item.new) {
+            return !item.file || !item.description
+        }
         return !item.icon || !item.description
     });
 };

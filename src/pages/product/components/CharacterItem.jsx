@@ -21,7 +21,7 @@ const CharacterItem = ({el, deleteCharacter, changeCharacterIcon, changeCharacte
     return (
         <div className='character_item'>
             <label className={`character_icon shadow ${error ? 'error' : ''}`} htmlFor={el.id}>
-                <img src={URL.createObjectURL(el.icon)} alt="" />
+                <img src={URL.createObjectURL(el.file)} alt="" />
                 <input 
                     value={''}
                     id={el.id} 

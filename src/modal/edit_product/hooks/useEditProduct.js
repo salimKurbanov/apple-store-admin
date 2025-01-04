@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react"
-import { getColor, initCnavasImage, rgbToHex, validateArray, validateFields } from "../../../utils/Services"
+import { getColor, initCnavasImage, rgbToHex, validateArray, validateCharactersArray, validateFields } from "../../../utils/Services"
 import Store from "../../../utils/Store"
 import Api from "../../../utils/Api"
 
@@ -7,6 +7,7 @@ export default function useEditProduct() {
     const [isOpen, setIsOpen] = useState(false)
     const [id, setId] = useState(false)
     const [image, setImage] = useState(undefined)
+    const [mainFile, setMainFile] = useState(false)
     const [characters, setCharacters] = useState([])
     const [pipette, setPipette] = useState(false)
     const [commonData, setCommonData] = useState({
@@ -15,7 +16,7 @@ export default function useEditProduct() {
         price: '',
         colorName: '',
         color: '',
-        mainFile: false
+        article: ''
     })
     const [error, setError] = useState({
         name: false,
@@ -37,7 +38,8 @@ export default function useEditProduct() {
             memory: data.memory,
             price: (data.price / 100).toFixed(2),
             colorName: data.colorname,
-            color: data.color
+            color: data.color,
+            article: data.article
         }))
 
         setCharacters(data.specifications.map((el) => {
@@ -70,7 +72,8 @@ export default function useEditProduct() {
     }, [image, isBlock.current]);
 
     Store.useListener('edit_new_character', (data) => {
-        setCharacters(prev => ([...prev, data]))
+        let newEl = {...data, new: true}
+        setCharacters(prev => ([...prev, newEl]))
     })
 
     Store.useListener('editColorToForm', (data) => {
@@ -121,7 +124,8 @@ export default function useEditProduct() {
     const changeCharacterIcon = (e, id) => {
         setError(prev => ({...prev, characters: false}))
         setCharacters(characters.map((el) => {
-            if(el.id === id) {
+            let elId = el.id || el.specificationsid
+            if(elId === id) {
                 return ({...el, file: e.target.files[0]})
             }
             return el;
@@ -131,7 +135,8 @@ export default function useEditProduct() {
     const changeCharacterDescription = (e, id) => {
         setError(prev => ({...prev, characters: false}))
         setCharacters(characters.map((el) => {
-            if(el.id === id) {
+            let elId = el.id || el.specificationsid
+            if(elId === id) {
                 return ({...el, description: e.target.value})
             }
             return el;
@@ -143,38 +148,38 @@ export default function useEditProduct() {
 
         let err = false
         let emptyFields = validateFields(commonData)
-        let emptyCharacter = validateArray(characters)
+        let emptyCharacter = validateCharactersArray(characters)
 
-        // if(emptyFields) {
-        //     setError(prev => ({
-        //         ...prev,
-        //         ...emptyFields.reduce((acc, field) => {
-        //             acc[field] = 'это обязательное поля';
-        //             return acc;
-        //         }, {})
-        //     }));
+        if(emptyFields) {
+            setError(prev => ({
+                ...prev,
+                ...emptyFields.reduce((acc, field) => {
+                    acc[field] = 'это обязательное поля';
+                    return acc;
+                }, {})
+            }));
 
-        //     err = true
-        // }
+            err = true
+        }
 
-        // if(!image) {
-        //     setError(prev => ({...prev, image: true}))
-        //     err = true
-        // }
+        if(!image) {
+            setError(prev => ({...prev, image: true}))
+            err = true
+        }
 
-        // if(emptyCharacter || characters.length <= 0) {
-        //     setError(prev => ({...prev, characters: true}))
-        //     err = true
-        // }
+        if(emptyCharacter || characters.length <= 0) {
+            setError(prev => ({...prev, characters: true}))
+            err = true
+        }
         
-        // if(err) {
-        //     return
-        // }
+        if(err) {
+            return
+        }
         
-        // if(+commonData.price <= 0) {
-        //     setError(prev => ({...prev, price: true}))
-        //     return
-        // }
+        if(+commonData.price <= 0) {
+            setError(prev => ({...prev, price: true}))
+            return
+        }
 
         let specifications = []
 
@@ -185,17 +190,28 @@ export default function useEditProduct() {
         data.append('colorName', commonData.colorName)
         data.append('color', commonData.color)
         data.append('main_image', image)
-        data.append('mainFile', commonData.mainFile)
+        data.append('mainFile', mainFile)
 
         let charactersCreate = characters.map(async (el) => {
             let char = new FormData()
-            char.append('icon', el.icon)
-            char.append('file', el.file)
             char.append('description', el.description)
-            let item = await Api.putFormData(char, `api/products/specification/update/${el.id}`)
+            char.append('file', el.file)
+            if(el.new) {
+                char.append('article', commonData.article)
+                let item = await Api.postFormData(char, 'api/products/specification/create')
 
-            if(item !== 'error') {
-                specifications.push(item.data)
+                if(item !== 'error') {
+                    item.data.id = item.data.specificationsid
+                    specifications.push(item.data)
+                }
+            } else {
+                char.append('icon', el.icon)
+                let item = await Api.putFormData(char, `api/products/specification/update/${el.id || el.specificationsid}`)
+    
+                if(item !== 'error') {
+                    item.data.id = item.data.specificationsid
+                    specifications.push(item.data)
+                }
             }
         })
         await Promise.all(charactersCreate)
@@ -208,11 +224,11 @@ export default function useEditProduct() {
         } else {
             Store.setListener('notice', {type: 'success', text: 'Товар изменён'})
             Store.setListener('edit_product', ({...res.data, specifications: specifications}))
-            closeModal(e)
+            closeModal(e, true)
         }
     }
 
-    const addImage = useCallback((e) => {
+    const addImage = (e) => {
         setError(prev => ({...prev, image: false}))
 
         const image = e.target.files[0]
@@ -220,11 +236,11 @@ export default function useEditProduct() {
         initCnavasImage(editImageRef, 230, URL.createObjectURL(image))
 
         setImage(image)
-        setCommonData(prev => ({...prev, mainFile: image}))
-    }, [setError, setImage])
+        setMainFile(image)
+    }
 
-    const closeModal = (e) => {
-        if(e.target === e.currentTarget) {
+    const closeModal = (e, key) => {
+        if(e.target === e.currentTarget || key) {
             setIsOpen(false)
             setCommonData({
                 name: '',
@@ -233,6 +249,7 @@ export default function useEditProduct() {
                 colorName: '',
                 color: ''
             })
+            setMainFile(false)
     
             setCharacters([])
             setImage(undefined)
@@ -250,10 +267,16 @@ export default function useEditProduct() {
         }
     }
 
-    const deleteCharacter = (id) => {
+    const deleteCharacter = async (id) => {
         setError(prev => ({...prev, characters: false}))
 
-        setCharacters((prev) => prev.filter(el => el.id !== id));
+        const res = await Api.delete(`api/products/delete/specification/${id}`)
+
+        if(res !== 'error') {
+            setCharacters((prev) => prev.filter(el => (el.id || el.specificationsid) !== id));
+            Store.setListener('notice', {type: 'success', text: 'Характеристика удалёна'})
+            return
+        }
     }
 
     const stopPipette = useCallback((e) => {

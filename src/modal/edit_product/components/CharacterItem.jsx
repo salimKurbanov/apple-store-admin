@@ -20,20 +20,20 @@ const CharacterItem = ({el, deleteCharacter, changeCharacterIcon, changeCharacte
 
     return (
         <div className='character_item'>
-            <label className={`character_icon shadow ${error ? 'error' : ''}`} htmlFor={el.id}>
+            <label className={`character_icon shadow ${error ? 'error' : ''}`} htmlFor={el.id || el.specificationsid}>
                 <img src={el.file instanceof File ? URL.createObjectURL(el.file) : `${Api.url}images/products/${el.icon}`} alt="" />
                 <input 
                     value={''}
-                    id={el.id} 
+                    id={el.id || el.specificationsid} 
                     type="file" 
-                    onChange={(e) => changeCharacterIcon(e, el.id)}
+                    onChange={(e) => changeCharacterIcon(e, (el.id || el.specificationsid))}
                 />
             </label>
 
             <div className={`description_container shadow ${error ? 'error' : ''}`}>
-                <textarea ref={area} className='description' value={el.description} onChange={(e) => changeCharacterDescription(e, el.id)}></textarea>
+                <textarea ref={area} className='description' value={el.description} onChange={(e) => changeCharacterDescription(e, (el.id || el.specificationsid))}></textarea>
 
-                <DeleteButton callback={() => deleteCharacter(el.id)}/>
+                <DeleteButton callback={() => deleteCharacter(el.id || el.specificationsid)}/>
             </div>
         </div>
     );

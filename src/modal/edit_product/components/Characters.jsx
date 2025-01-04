@@ -13,7 +13,7 @@ const Characters = ({setError, changeCharacterDescription, changeCharacterIcon, 
                     <CharacterItem
                         error={error}
                         el={el} 
-                        key={el.id} 
+                        key={el.id || el.specificationsid}
                         deleteCharacter={deleteCharacter}
                         changeCharacterIcon={changeCharacterIcon}
                         changeCharacterDescription={changeCharacterDescription}

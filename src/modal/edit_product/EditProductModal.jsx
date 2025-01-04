@@ -13,7 +13,7 @@ const EditProductModal = () => {
     if(!product.isOpen) return null
 
     return (
-        <div className='edit_product_modal_wrapper' onMouseDown={product.closeModal}>
+        <div className='edit_product_modal_wrapper' onMouseDown={(e) => product.closeModal(e)}>
             <div className="edit_product_modal">
                 <h2>Редактировать товар</h2>
 

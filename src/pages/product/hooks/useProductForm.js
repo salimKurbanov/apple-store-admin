@@ -79,7 +79,7 @@ export default function useProductForm () {
         setError(prev => ({...prev, characters: false}))
         setCharacters(characters.map((el) => {
             if(el.id === id) {
-                return ({...el, icon: e.target.files[0]})
+                return ({...el, file: e.target.files[0]})
             }
             return el;
         }))
@@ -149,12 +149,13 @@ export default function useProductForm () {
 
         let charactersCreate = characters.map(async (el) => {
             let char = new FormData()
-            char.append('file', el.icon)
+            char.append('file', el.file)
             char.append('description', el.description)
             char.append('article', article)
             let item = await Api.postFormData(char, 'api/products/specification/create')
 
             if(item !== 'error') {
+                item.data.id = item.data.specificationsid
                 specifications.push(item.data)
             }
         })
@@ -165,10 +166,10 @@ export default function useProductForm () {
         setLoading(false)
 
         if(res === 'error') {
-            Store.setListener('notice', {type: 'error', text: res.message})
+            Store.setListener('notice', {type: 'error', text: 'Ощибка'})
             return
         } else {
-            Store.setListener('notice', {type: 'success', text: 'товар добавлен'})
+            Store.setListener('notice', {type: 'success', text: 'Товар добавлен'})
             Store.setListener('add_product', ({...res.data, specifications: specifications}))
         }
     }

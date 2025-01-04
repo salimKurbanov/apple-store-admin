@@ -39,7 +39,7 @@ export default function StoreItem ({el, dollar, openEditProduct}) {
                     {el?.specifications?.length ? 
                         el.specifications.map((el) => (
                             <ItemOption 
-                                key={el.id}
+                                key={el.id || el.specificationsid}
                                 icon={`${Api.url}images/products/${el.icon}`}
                                 description={el.description}
                             />
