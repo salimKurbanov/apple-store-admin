@@ -40,7 +40,9 @@ export default function useEditProduct() {
             color: data.color
         }))
 
-        setCharacters(data.specifications)
+        setCharacters(data.specifications.map((el) => {
+            return ({...el, file: false})
+        }))
         setImage(data.main_image)
         setId(data.productid)
     })
@@ -119,7 +121,7 @@ export default function useEditProduct() {
     const changeCharacterIcon = (e, id) => {
         setError(prev => ({...prev, characters: false}))
         setCharacters(characters.map((el) => {
-            if(el.imageName === id) {
+            if(el.id === id) {
                 return ({...el, file: e.target.files[0]})
             }
             return el;
@@ -129,7 +131,7 @@ export default function useEditProduct() {
     const changeCharacterDescription = (e, id) => {
         setError(prev => ({...prev, characters: false}))
         setCharacters(characters.map((el) => {
-            if(el.imageName === id) {
+            if(el.id === id) {
                 return ({...el, description: e.target.value})
             }
             return el;
@@ -143,36 +145,38 @@ export default function useEditProduct() {
         let emptyFields = validateFields(commonData)
         let emptyCharacter = validateArray(characters)
 
-        if(emptyFields) {
-            setError(prev => ({
-                ...prev,
-                ...emptyFields.reduce((acc, field) => {
-                    acc[field] = 'это обязательное поля';
-                    return acc;
-                }, {})
-            }));
+        // if(emptyFields) {
+        //     setError(prev => ({
+        //         ...prev,
+        //         ...emptyFields.reduce((acc, field) => {
+        //             acc[field] = 'это обязательное поля';
+        //             return acc;
+        //         }, {})
+        //     }));
 
-            err = true
-        }
+        //     err = true
+        // }
 
-        if(!image) {
-            setError(prev => ({...prev, image: true}))
-            err = true
-        }
+        // if(!image) {
+        //     setError(prev => ({...prev, image: true}))
+        //     err = true
+        // }
 
-        if(emptyCharacter || characters.length <= 0) {
-            setError(prev => ({...prev, characters: true}))
-            err = true
-        }
+        // if(emptyCharacter || characters.length <= 0) {
+        //     setError(prev => ({...prev, characters: true}))
+        //     err = true
+        // }
         
-        if(err) {
-            return
-        }
+        // if(err) {
+        //     return
+        // }
         
-        if(+commonData.price <= 0) {
-            setError(prev => ({...prev, price: true}))
-            return
-        }
+        // if(+commonData.price <= 0) {
+        //     setError(prev => ({...prev, price: true}))
+        //     return
+        // }
+
+        let specifications = []
 
         let data = new FormData()
         data.append('title', commonData.name)
@@ -181,8 +185,20 @@ export default function useEditProduct() {
         data.append('colorName', commonData.colorName)
         data.append('color', commonData.color)
         data.append('main_image', image)
-        data.append('specifications', JSON.stringify(characters))
         data.append('mainFile', commonData.mainFile)
+
+        let charactersCreate = characters.map(async (el) => {
+            let char = new FormData()
+            char.append('icon', el.icon)
+            char.append('file', el.file)
+            char.append('description', el.description)
+            let item = await Api.putFormData(char, `api/products/specification/update/${el.id}`)
+
+            if(item !== 'error') {
+                specifications.push(item.data)
+            }
+        })
+        await Promise.all(charactersCreate)
 
         const res = await Api.putFormData(data, `api/products/update/${id}`)
 
@@ -191,7 +207,8 @@ export default function useEditProduct() {
             return
         } else {
             Store.setListener('notice', {type: 'success', text: 'Товар изменён'})
-            closeModal()
+            Store.setListener('edit_product', ({...res.data, specifications: specifications}))
+            closeModal(e)
         }
     }
 
@@ -233,10 +250,10 @@ export default function useEditProduct() {
         }
     }
 
-    const deleteCharacter = (elToDelete) => {
+    const deleteCharacter = (id) => {
         setError(prev => ({...prev, characters: false}))
 
-        setCharacters((prev) => prev.filter(el => el.imageName !== elToDelete));
+        setCharacters((prev) => prev.filter(el => el.id !== id));
     }
 
     const stopPipette = useCallback((e) => {

@@ -1,11 +1,11 @@
 import React from 'react';
 import Cross from '../../../components/cross/Cross';
 
-const AddIcon = ({error, file, callback}) => {
+const AddIcon = ({error, icon, callback}) => {
     return (
         <label className={`add_icon ${error ? 'error' : ''} `} htmlFor='character_icon'>
-            {file ? 
-                <img className='image' src={URL.createObjectURL(file)} alt="" />
+            {icon ? 
+                <img className='image' src={URL.createObjectURL(icon)} alt="" />
             :
                 <Cross />
             }

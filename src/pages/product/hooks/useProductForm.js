@@ -78,8 +78,8 @@ export default function useProductForm () {
     const changeCharacterIcon = (e, id) => {
         setError(prev => ({...prev, characters: false}))
         setCharacters(characters.map((el) => {
-            if(el.imageName === id) {
-                return ({...el, file: e.target.files[0]})
+            if(el.id === id) {
+                return ({...el, icon: e.target.files[0]})
             }
             return el;
         }))
@@ -88,7 +88,7 @@ export default function useProductForm () {
     const changeCharacterDescription = (e, id) => {
         setError(prev => ({...prev, characters: false}))
         setCharacters(characters.map((el) => {
-            if(el.imageName === id) {
+            if(el.id === id) {
                 return ({...el, description: e.target.value})
             }
             return el;
@@ -135,6 +135,9 @@ export default function useProductForm () {
 
         setLoading(true)
 
+        let article = crypto.randomUUID()
+        let specifications = []
+
         let data = new FormData()
         data.append('title', commonData.name)
         data.append('memory', commonData.memory)
@@ -142,10 +145,22 @@ export default function useProductForm () {
         data.append('colorName', commonData.colorName)
         data.append('color', commonData.color)
         data.append('main_image', image)
-        console.log(JSON.stringify(characters))
-        data.append('specifications', JSON.stringify(characters))
+        data.append('article', article)
 
-        const res = await Api.postFormData(data, 'api/products/create')
+        let charactersCreate = characters.map(async (el) => {
+            let char = new FormData()
+            char.append('file', el.icon)
+            char.append('description', el.description)
+            char.append('article', article)
+            let item = await Api.postFormData(char, 'api/products/specification/create')
+
+            if(item !== 'error') {
+                specifications.push(item.data)
+            }
+        })
+        await Promise.all(charactersCreate)
+
+        let res = await Api.postFormData(data, 'api/products/create')
 
         setLoading(false)
 
@@ -154,7 +169,7 @@ export default function useProductForm () {
             return
         } else {
             Store.setListener('notice', {type: 'success', text: 'товар добавлен'})
-            Store.setListener('add_product', res.data)
+            Store.setListener('add_product', ({...res.data, specifications: specifications}))
         }
     }
 
@@ -168,10 +183,10 @@ export default function useProductForm () {
         setImage(image)
     }
 
-    const deleteCharacter = (elToDelete) => {
+    const deleteCharacter = (id) => {
         setError(prev => ({...prev, characters: false}))
 
-        setCharacters((prev) => prev.filter(el => el.imageName !== elToDelete));
+        setCharacters((prev) => prev.filter(el => el.id !== id));
     }
 
     const stopPipette = useCallback((e) => {

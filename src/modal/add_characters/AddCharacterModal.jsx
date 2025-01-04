@@ -17,7 +17,7 @@ const AddCharacterModal = () => {
                 <h2>Добавить характеристику</h2>
 
                 <div className="add_character_modal_content">
-                    <AddIcon error={obj.error.icon} file={obj.newItem.file} callback={obj.addImage}/>
+                    <AddIcon error={obj.error.icon} icon={obj.newItem.icon} callback={obj.addImage}/>
 
                     <Description 
                         error={obj.error.description}

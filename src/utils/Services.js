@@ -71,6 +71,6 @@ export function validateFields (data) {
 
 export function validateArray (array) {
     return array.some(item => {
-        return !item.file || !item.description || !item.imageName;
+        return !item.icon || !item.description
     });
 };

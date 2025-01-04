@@ -11,6 +11,15 @@ export default function useStoreList () {
         setList(prev => ([data, ...prev]))
     })
 
+    Store.useListener('edit_product', (data) => {
+        setList(list.map(el => {
+            if(el.productid === data.productid) {
+                return data
+            }
+            return el
+        }))
+    })
+
     Store.useListener('delete_product', (id) => {
         setList(prev => prev.filter(el => el.productid !== id))
     })

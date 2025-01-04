@@ -8,9 +8,9 @@ export default function useAddCharacter () {
         description: false
     })
     const [newItem, setNewItem] = useState({
-        file: false,
+        id: crypto.randomUUID(),
+        icon: false,
         description: '',
-        imageName: crypto.randomUUID(),
     })
     const [key, setKey] = useState('')
 
@@ -28,9 +28,8 @@ export default function useAddCharacter () {
             description: false
         })
         setNewItem({
-            file: false,
+            icon: false,
             description: '',
-            imageName: crypto.randomUUID(),
         })
     }
 
@@ -52,7 +51,7 @@ export default function useAddCharacter () {
 
     const addImage = (e) => {
         setError(prev => ({...prev, icon: false}))
-        setNewItem(prev => ({...prev, file: e.target.files[0]}))
+        setNewItem(prev => ({...prev, icon: e.target.files[0]}))
     }
 
     const addCharacter = (e) => {
@@ -60,10 +59,10 @@ export default function useAddCharacter () {
         if(newItem.description === '') {
             setError(prev => ({...prev, description: true}))
         }
-        if(newItem.file === false) {
+        if(newItem.icon === false) {
             setError(prev => ({...prev, icon: true}))
         }
-        if(newItem.file === false || newItem.description === '') {
+        if(newItem.icon === false || newItem.description === '') {
             return
         }
 
