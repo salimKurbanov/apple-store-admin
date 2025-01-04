@@ -32,6 +32,15 @@ const List = () => {
         Store.setListener('open_services_modal', {modal: true, el: el})
     }
 
+    Store.useListener('updateList', (data) => {
+        setList(prev => prev.map((el) => {
+            if(el.servicesid === data.servicesid) {
+                return data
+            } 
+            return el
+        }))
+    })
+
     useEffect(() => {
 
         (async () => {
