@@ -2,6 +2,7 @@ import React from 'react';
 import './css/services.css';
 import Form from './components/Form';
 import List from './components/List';
+import Orders from './components/Orders';
 
 
 const Services = () => {
@@ -14,7 +15,7 @@ const Services = () => {
                 <List />
             </div>
 
-            <div className="services_orders"></div>
+            <Orders />
         </div>
     );
 };

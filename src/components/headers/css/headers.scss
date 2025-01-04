@@ -30,6 +30,9 @@ header {
             .course_title {
                 font-weight: 600;
                 font-size: 16px;
+                @include mediaMaxWidth(768) {
+                    display: none;
+                }
             }
             form {
                 padding: 10px;

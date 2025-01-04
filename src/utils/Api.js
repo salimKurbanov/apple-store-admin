@@ -38,7 +38,7 @@ Api.auth = async (body) => {
         return res
 
     } catch(e) {
-        console.log(e)
+        Store.setListener('notice', {type: 'error', text: 'Ошибка сервера'})
         return 'error'
     }
 }
@@ -53,9 +53,11 @@ Api.get = async (path) => {
         if(res.status) {
             return res.data
         } else {
+            Store.setListener('notice', {type: 'error', text: res.message})
             return 'error'
         }
     } catch(e) {
+        Store.setListener('notice', {type: 'error', text: 'Ошибка сервера'})
         return 'error'
     }
 
@@ -80,7 +82,31 @@ Api.postFormData = async (data, path) => {
 
         return res
     } catch(e) {
-        console.log(e)
+        Store.setListener('notice', {type: 'error', text: 'Ошибка сервера'})
+        return 'error'
+    }
+
+}
+
+Api.putFormData = async (data, path) => {
+
+    try {
+        let res = await fetch(`${Api.url}${path}`, {
+            method: 'PUT',
+            body: data,
+            headers: {
+                ssid: localStorage.getItem('accessToken')
+            }
+        })
+
+        res = await res.json()
+
+        if(res.status === 401) {
+            return Api.logout()
+        }
+
+        return res
+    } catch(e) {
         return 'error'
     }
 
@@ -106,10 +132,12 @@ Api.delete = async (path) => {
         if(res.success) {
             return res
         } else {
+            Store.setListener('notice', {type: 'error', text: res.message})
             return 'error'
         }
 
     } catch(e) {
+        Store.setListener('notice', {type: 'error', text: 'Ошибка сервера'})
         return 'error'
     }
 }
@@ -135,10 +163,12 @@ Api.post = async (body, path) => {
         if(res.success) {
             return res
         } else {
+            Store.setListener('notice', {type: 'error', text: res.message})
             return 'error'
         }
 
     } catch(e) {
+        Store.setListener('notice', {type: 'error', text: 'Ошибка сервера'})
         return 'error'
     }
 }
@@ -164,10 +194,12 @@ Api.put = async (body, path) => {
         if(res.success) {
             return res
         } else {
+            Store.setListener('notice', {type: 'error', text: res.message})
             return 'error'
         }
 
     } catch(e) {
+        Store.setListener('notice', {type: 'error', text: 'Ошибка сервера'})
         return 'error'
     }
 }
@@ -175,10 +207,6 @@ Api.put = async (body, path) => {
 Api.logout = () => {
     localStorage.removeItem('accessToken')
     return window.location.reload()
-}
-
-Api.course = async () => {
-    
 }
 
 export default Api;
