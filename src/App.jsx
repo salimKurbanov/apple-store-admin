@@ -12,6 +12,7 @@ import Notice from './components/notice/Notice';
 import Services from './pages/services/Services';
 import Notification from './components/notification/Notification';
 import EditProductModal from './modal/edit_product/EditProductModal';
+import UpdateServices from './modal/update_services/UpdateServices';
 
 
 const App = () => {
@@ -39,6 +40,7 @@ const App = () => {
 
         <AddCharacterModal />
         <EditProductModal />
+        <UpdateServices />
       </div>}
 
       <Notice.Init />

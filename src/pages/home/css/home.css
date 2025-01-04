@@ -13,19 +13,6 @@
     gap: calc(25px + 25 * 0.0520833333vw);
   }
 }
-.home .title {
-  font-weight: 500;
-}
-@media (max-width: 768px) {
-  .home .title {
-    font-size: calc(20px + 6.8 * (100vw - 320px) / 1920);
-  }
-}
-@media (min-width: 768px) {
-  .home .title {
-    font-size: calc(20px + 4 * 0.0520833333vw);
-  }
-}
 @media screen and (max-width: 900px) {
   .home {
     flex-direction: column;
@@ -207,6 +194,14 @@
 }
 .home .orders {
   flex: 1;
+}
+.home .orders .title {
+  padding-left: 15px;
+}
+@media screen and (max-width: 900px) {
+  .home .orders .title {
+    padding-left: 10px;
+  }
 }
 .home .orders .order_list_item {
   width: 100%;
@@ -414,7 +409,7 @@
   margin-top: 10px;
   max-height: 496px;
   overflow-y: auto;
-  padding: 20px;
+  padding: 15px;
 }
 @media screen and (max-width: 900px) {
   .home .orders .orders_list {
@@ -424,7 +419,22 @@
   }
 }
 .home .orders .orders_list::-webkit-scrollbar {
-  width: 0;
+  width: 4px;
+}
+.home .orders .orders_list::-webkit-scrollbar-track {
+  background: transparent;
+}
+.home .orders .orders_list::-webkit-scrollbar-thumb {
+  background-color: var(--grey);
+  border-radius: 10px;
+  border-top: 15px solid #fff;
+  border-bottom: 15px solid #fff;
+}
+@media screen and (max-width: 900px) {
+  .home .orders .orders_list::-webkit-scrollbar-thumb {
+    border-top: 10px solid #fff;
+    border-bottom: 10px solid #fff;
+  }
 }
 .home .orders .history {
   margin-top: 50px;

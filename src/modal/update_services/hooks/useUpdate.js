@@ -1,49 +1,48 @@
-import { useEffect, useRef, useState } from "react"
-import Api from "../../../utils/Api"
+import { useRef, useState } from "react"
 import Store from "../../../utils/Store"
+import Api from "../../../utils/Api"
 import { validateFields } from "../../../utils/Services"
 
 
-export default function useServices() {
+export default function useUpdate() {
 
-    const [error, setError] = useState({
-        description: false,
-        title: false,
-        price: false,
-        image: false
-    })
-    const [input, setInput] = useState({
+    const [item, setItem] = useState({
+        datetime: '',
         description: '',
         image: '',
-        title: '',
         price: '',
+        servicesid: '',
+        title: '',
+    })
+    const [img, setImg] = useState({
+        file: false,
         preview: false
     })
+    const [error, setError] = useState({
+        description: false,
+        image: false,
+        price: false,
+        servicesid: false,
+        title: false
+    })
+    const [open, setOpen] = useState(false)
     const area = useRef(null)
 
-    useEffect(() => {
-        Store.setListener('title', 'Услуги')   
-    }, [])
-
-    const inputDescription = (e) => {
-        const textarea = area.current;
-        const value = validate(e.target.value, 'description')
-    
-        if (textarea) {
-            textarea.style.height = '45px'; 
-            const isOverflowing = textarea.scrollHeight > textarea.clientHeight; 
-
-            if (isOverflowing) {
-                textarea.style.height = `${textarea.scrollHeight}px`; 
-            }
-        }
-    
-        setInput(prev => ({...prev, description: value}));
-    };
+    Store.useListener('open_services_modal', (data) => {
+        setOpen(data.modal)
+        setItem(data.el)
+    })
 
     const previewImg = (e) => {
         setError(prev => ({...prev, image: false}))
-        setInput(prev => ({...prev, image: e.target.files[0], preview: URL.createObjectURL(e.target.files[0])}))
+        setImg(prev => ({...prev, file: e.target.files[0], preview: URL.createObjectURL(e.target.files[0])}))
+    }
+
+    const close = () => {
+        document.body.style.overflow = 'visible'
+        setItem({ datetime: '', description: '', image: '', price: '', servicesid: '', title: ''})
+        setImg({file: false, preview: false})
+        setOpen(false)
     }
 
     const validate = (value, name) => {
@@ -78,16 +77,31 @@ export default function useServices() {
 
     const change = (e, name) => {
         const value = validate(e.target.value, name)
-
-        setInput(prev => ({...prev, [name]: value}))
+        setItem(prev => ({...prev, [name]: value}))
     }
+
+    const inputDescription = (e) => {
+        const textarea = area.current;
+        const value = validate(e.target.value, 'description')
+    
+        if (textarea) {
+            textarea.style.height = '45px'; 
+            const isOverflowing = textarea.scrollHeight > textarea.clientHeight; 
+
+            if (isOverflowing) {
+                textarea.style.height = `${textarea.scrollHeight}px`; 
+            }
+        }
+    
+        setItem(prev => ({...prev, description: value}));
+    };
 
     const submitForm = async (e) => {
         e.preventDefault()
         
         let err = false
 
-        const emptyFields = validateFields(input)
+        const emptyFields = validateFields(item)
 
         if(emptyFields) {
             setError(prev => ({
@@ -101,12 +115,6 @@ export default function useServices() {
             err = true
         }
 
-        if(!input.image) {
-            setError(prev => ({...prev, image: true}))
-            err = true
-        }
-
-
         if(err) {
             Store.setListener('notice', {type: 'error', text: 'Заполните правильно все поля'})
             return
@@ -114,30 +122,33 @@ export default function useServices() {
 
 
         let data = new FormData()
-        data.append('title', input.title)
-        data.append('description', input.description)
-        data.append('image', input.image)
-        data.append('price', input.price)
+        data.append('title', item.title)
+        data.append('description', item.description)
+        data.append('image', item.image)
+        data.append('price', item.price)
+        data.append('file', img.file)
 
-        let req = await Api.postFormData(data, 'api/services/create')
+        let req = await Api.putFormData(data, `api/services/update/${item.servicesid}`)
 
         if(req === 'error') {
-            return 
+            return
         }
 
-        setInput(prev => ({...prev, title: '', description: '', price: '', image: false, preview: false}))
+        Store.setListener('updateList', req.data)
         Store.setListener('notice', {type: 'success', text: req.message})
-        Store.setListener('newService', (req.data))
+        close()
     }
 
     return {
-        submitForm,
-        change,
-        validate,
+        item, 
+        img,
+        error,
+        open,
+        area,
         previewImg,
-        inputDescription,
-        error, 
-        input,
-        area
+        close,
+        change,
+        submitForm,
+        inputDescription
     }
 }
