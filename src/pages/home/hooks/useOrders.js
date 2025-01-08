@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import Api from "../../../utils/Api"
+import Store from "../../../utils/Store"
 
 
 export default function useOrders() {
@@ -37,6 +38,7 @@ export default function useOrders() {
 
         if(res !== 'error') {
             let item = list.newOrders.find(el => el.ordersid === id)
+            Store.setListener('profit', item.price / 100)
             setList(prev => ({
                 ...prev, 
                 newOrders: prev.newOrders.filter(el => el.ordersid !== id), 

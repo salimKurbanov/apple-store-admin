@@ -16,6 +16,10 @@ const OrdersItem = ({mode, el, callback}) => {
                         <div className="name" title={el.title}>{el.title}</div>
                         <div className="memory">{el.memory}</div>
                         <div className="price">{(el.price / 100).toFixed(2)} руб.</div>
+                        <div className="color">
+                            <span style={{background: el.color}}></span>
+                            <p>{el.colorname}</p>
+                        </div>
                     </div>
                 </div>
                 <div className="user">

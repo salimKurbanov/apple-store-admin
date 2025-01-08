@@ -3,7 +3,7 @@ import React from 'react';
 const Head = () => {
     return (
         <div className="statistic_header">
-            <div className="title">Сатистика</div>
+            <div className="title">Сатистика за месяц</div>
             {/* <div className="filter">
                 день
                 <svg width="13.321289" height="7.665039" viewBox="0 0 13.3213 7.66504" fill="none" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">

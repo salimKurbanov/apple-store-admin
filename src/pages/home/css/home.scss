@@ -37,6 +37,21 @@
                 display: flex;
                 flex-direction: column;
                 gap: 5px;
+                @include mediaMaxWidth(768) {
+                    min-width: 150px;
+                    height: 130px;
+                }
+                &.profit {
+                    height: auto;
+                    flex: 0 0 100%;
+                    background-color: var(--grey);
+                    .profit_count  {
+                        margin-top: 10px;
+                        @include adaptiveFont(25, 20);
+                        color: var(--black);
+                        font-weight: 500;
+                    }
+                }
                 h2 {
                     @include adaptiveFont(20, 18);
                     margin-bottom: auto;
@@ -64,12 +79,18 @@
         .graphic {
             width: 100%;
             margin-top: 5dvh;
+            @include mediaMaxWidth(768) {
+                padding: 0 10px;
+            }
             .graphic_grid {
                 height: 330px;
                 display: flex;
                 align-items: flex-end;
                 justify-content: space-between;
                 gap: 10px;
+                @include mediaMaxWidth(768) {
+                    gap: 0px;
+                }
                 .day {
                     width: 10%;
                     text-align: center;
@@ -188,7 +209,7 @@
                     .description {
                         display: flex;
                         flex-direction: column;
-                        justify-content: space-between;
+                        gap: 10px;
                         gap: 10px;
                         .name {
                             @include adaptiveFont(18, 15);
@@ -205,19 +226,34 @@
                             @include adaptiveFont(16, 14);
                             color: var(--blue);
                         }
+                        .color {
+                            display: flex;
+                            gap: 5px;
+                            align-items: center;
+                            span {
+                                display: block;
+                                width: 13px;
+                                height: 13px;
+                                background-color: var(--black);
+                                border-radius: 50%;
+                            }
+                            p {
+                                @include adaptiveFont(16, 14);
+                            }
+                        }
                     }
                 }
                 .user {
                     display: flex;
-                    justify-content: space-between;
                     flex: 10;
                     align-items: flex-start;
+                    justify-content: space-between;
                     gap: 10px;
                     min-height: 70px;
                     .description {
                         display: flex;
                         flex-direction: column;
-                        justify-content: space-between;
+                        gap: 10px;
                         height: 100%;
                         .name,
                         .date,

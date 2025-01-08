@@ -25,7 +25,7 @@ const Form = () => {
             </div>
 
             <Button type={'submit'} callback={services.submitForm} mode={'black max-content'}>
-                Добавить
+                {services.load ? 'Загрузка...' : 'Добавить'}
             </Button>
         </form>
 

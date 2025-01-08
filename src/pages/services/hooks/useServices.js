@@ -19,6 +19,7 @@ export default function useServices() {
         price: '',
         preview: false
     })
+    const [load, setLoad] = useState(false)
     const area = useRef(null)
 
     useEffect(() => {
@@ -112,6 +113,7 @@ export default function useServices() {
             return
         }
 
+        setLoad(true)
 
         let data = new FormData()
         data.append('title', input.title)
@@ -125,6 +127,7 @@ export default function useServices() {
             return 
         }
 
+        setLoad(false)
         setInput(prev => ({...prev, title: '', description: '', price: '', image: false, preview: false}))
         Store.setListener('notice', {type: 'success', text: req.message})
         Store.setListener('newService', (req.data))
@@ -138,6 +141,7 @@ export default function useServices() {
         inputDescription,
         error, 
         input,
-        area
+        area,
+        load
     }
 }
