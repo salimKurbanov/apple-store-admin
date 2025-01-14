@@ -5,7 +5,7 @@
         white-space: nowrap;
         @include adaptiveFont(16, 14);
         text-transform: lowercase;
-        color: var(--white);  
+        color: var(--black);  
         margin-bottom: 3.5px;
     }
     input {
@@ -14,10 +14,22 @@
         border-radius: 15px;
         background-color: var(--grey);
         color: var(--black);
+        transition: 0.3s;
     }
     &.full {
         input {
             width: 100%;
         }
+    }
+    &.error {
+        input {
+            background-color: var(--error);
+        }
+    }
+    .error_message {
+        height: 14px;
+        font-size: 14px;
+        color: var(--red);
+        margin-top: 3px;
     }
 }

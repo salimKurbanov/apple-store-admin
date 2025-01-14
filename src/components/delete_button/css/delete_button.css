@@ -1,0 +1,24 @@
+@charset "UTF-8";
+/*-------------Миксины----------------*/
+.delete_btn {
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+  flex-grow: 0;
+  background-color: var(--black);
+  border: 2px solid var(--black);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s;
+  cursor: pointer;
+}
+@media screen and (min-width: 992px) {
+  .delete_btn:hover {
+    background-color: transparent;
+  }
+  .delete_btn:hover .cross span {
+    background-color: var(--black);
+  }
+}/*# sourceMappingURL=delete_button.css.map */

@@ -1,0 +1,73 @@
+@import './../../../style/common';
+
+.add_character_modal_wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(7px);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: Open 0.7s forwards;
+
+    .add_character_modal {
+        padding: 20px 25px;
+        background-color: var(--white);
+        border-radius: 15px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        & h2 {
+            @include adaptiveFont(18, 16);
+            color: var(--black);
+            font-weight: 600;
+        }
+
+        .add_character_modal_content {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+
+            .add_icon {
+                height: 45px;
+                width: 45px;
+                flex-shrink: 0;
+                border-radius: 10px;
+                background-color: var(--grey);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+
+                & input {
+                    height: 0;
+                    width: 0;
+                }
+            }
+
+            .description {
+                background-color: var(--grey);
+                width: 250px;
+                flex-shrink: 0;
+                border-radius: 15px;
+                font-size: 14px;
+                height: 45px;
+                resize: none;
+                overflow: hidden;
+                padding: 12px 15px;
+            }
+
+            .description, .add_icon {
+                transition: background-color 0.4s;
+                &.error {
+                    background-color: var(--red);
+                }
+            }
+        }
+    }
+}

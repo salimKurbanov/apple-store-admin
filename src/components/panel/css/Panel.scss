@@ -1,0 +1,91 @@
+@import './../../../style/common';
+
+.panel {
+    position: fixed;
+    top: 40px;
+    left: 20px;
+    bottom: 40px;
+    width: 80px;
+    border-radius: 20px;
+    background-color: var(--black);
+    padding: 25px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    @include mediaMaxWidth(991) {
+        display: none;
+    }
+    nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3dvh;
+        .link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+            svg {
+                path,
+                rect {
+                    transition: 0.3s;
+                }
+            }
+            &.active {
+                background-color: var(--white);
+                svg {
+                    path {
+                        fill: var(--black);
+                    }
+                    rect {
+                        stroke: var(--black);
+                    }
+                }
+            }
+            @include mediaMinWidth(992) {
+                &:hover {
+                    background-color: var(--white);
+                    svg {
+                        path {
+                            fill: var(--black);
+                        }
+                        rect {
+                            stroke: var(--black);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .exit {
+        cursor: pointer;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        transition: 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        svg {
+            .contur {
+                transition: 0.3s;
+            }
+        }
+        @include mediaMinWidth(992) {
+            &:hover {
+                background-color: var(--white);
+                svg {
+                    .contur {
+                        fill: var(--black);
+                    }
+                }
+            }
+        }
+    }
+}

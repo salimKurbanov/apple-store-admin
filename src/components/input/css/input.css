@@ -3,7 +3,7 @@
 .input_field .label {
   white-space: nowrap;
   text-transform: lowercase;
-  color: var(--white);
+  color: var(--black);
   margin-bottom: 3.5px;
 }
 @media (max-width: 768px) {
@@ -21,6 +21,7 @@
   border-radius: 15px;
   background-color: var(--grey);
   color: var(--black);
+  transition: 0.3s;
 }
 @media (max-width: 768px) {
   .input_field input {
@@ -34,4 +35,13 @@
 }
 .input_field.full input {
   width: 100%;
+}
+.input_field.error input {
+  background-color: var(--error);
+}
+.input_field .error_message {
+  height: 14px;
+  font-size: 14px;
+  color: var(--red);
+  margin-top: 3px;
 }/*# sourceMappingURL=input.css.map */

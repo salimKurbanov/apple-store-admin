@@ -1,0 +1,151 @@
+@import './../../../style/common';
+
+.color_picker {
+    position: absolute;
+    top: -230px;
+    left: calc(100% + 10px);
+    width: 250px;
+    max-width: 250px;
+    background-color: var(--white);
+    border-radius: 15px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    animation: Open 0.5s forwards;
+
+    @include mediaMaxWidth(400) {
+        top: unset;
+        bottom: calc(100% + 20px);
+        left: 0;
+    }
+
+    .header {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        & h2 {
+            font-weight: 600;
+            font-size: 18px;
+            color: var(--black);
+        }
+
+        .piepette {
+            width: 25px;
+            height: 25px;
+            border-radius: 5px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+            // cursor: pointer;
+
+            @include mediaMinWidth(992) {
+            }
+            &:hover {
+                background-color: var(--grey);
+            }
+        }
+    }
+
+    & .input_field input{
+        text-transform: uppercase;
+    }
+
+    .image_container {
+        position: relative;
+        width: 100%;
+        border-radius: 10px;
+
+        & img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .pointer {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            transform: translate(-50%, -50%);
+            height: 15px;
+            width: 15px;
+            border-radius: 50%;
+            border: 2px solid var(--white);
+            box-shadow: 0 0 2px 0 #000;
+            transition: 0.1;
+            pointer-events: none;
+        }
+
+        .gradient {
+            border-radius: 10px;
+        }
+    }
+
+    .transparency {
+        width: 100%;
+
+        & h4 {
+            @include adaptiveFont(16, 14);
+            text-transform: lowercase;
+            color: var(--black);  
+            margin-bottom: 3.5px;
+        }
+
+        & input {
+            width: 100%;
+            cursor: pointer;
+        }
+
+        /* Удаляем стандартные стили браузера */
+        input[type="range"] {
+            -webkit-appearance: none; /* Chrome, Safari, Opera */
+            appearance: none; /* Firefox */
+            width: 100%;
+            height: 15px;
+            border-radius: 10px;
+            background: linear-gradient(270.00deg, rgb(0, 0, 0) 2.29%,rgba(128, 128, 128, 0.15) 99.978%,rgba(255, 255, 255, 0) 100%);
+            border-radius: 8px; /* Края трека */
+            outline: none;
+            margin: 0; /* Убираем дополнительные отступы */
+        }
+        
+        /* Стилизация ползунка */
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none; /* Убираем стандартный стиль */
+            appearance: none; /* Для совместимости */
+            width: 15px;
+            height: 15px;
+            background-color: var(--grey); /* Цвет ползунка */
+            border: 2px solid var(--black); /* Обводка */
+            border-radius: 50%; /* Делаем круглый */
+            cursor: pointer;
+        }
+        
+        input[type="range"]::-moz-range-thumb {
+            width: 15px;
+            height: 15px;
+            background-color: var(--grey); /* Цвет ползунка */
+            border: 2px solid var(--black); /* Обводка */
+            border-radius: 50%; /* Делаем круглый */
+            cursor: pointer;
+        }
+        
+        input[type="range"]::-ms-thumb {
+            width: 15px;
+            height: 15px;
+            background-color: var(--grey); /* Цвет ползунка */
+            border: 2px solid var(--black); /* Обводка */
+            border-radius: 50%; /* Делаем круглый */
+            cursor: pointer;
+        }
+        
+        /* Для заполнения слева от ползунка (в Chrome, Edge, Opera) */
+        input[type="range"]::-webkit-slider-runnable-track {
+            height: 15px;
+            border-radius: 10px;
+        }
+    }
+}
