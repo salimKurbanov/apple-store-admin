@@ -22,7 +22,7 @@ const Characters = ({ setError, changeCharacterDescription, changeCharacterIcon,
             </>
             : <></>}
             
-            {list?.length < 4 ? <AddCharacter setError={setError} error={error} />:<></>}
+            {list?.length < 3 ? <AddCharacter setError={setError} error={error} />:<></>}
         </div>
     );
 };
