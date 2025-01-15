@@ -201,11 +201,11 @@ Api.post = async (body, path) => {
 
 Api.put = async (body, path) => {
     try {
-
+        
         let res = await fetch(`${Api.url}${path}`, {
             method: 'PUT',
             headers: {
-                "Content-Type": "application/json;charset=utf-8",
+                'Content-Type': 'application/json;charset=utf-8',
                 ssid: localStorage.getItem('accessToken')
             },
             body: JSON.stringify(body)
