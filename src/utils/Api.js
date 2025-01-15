@@ -1,6 +1,8 @@
+import Store from "./Store"
+
 const Api = {}
 
-Api.url = 'http://localhost:5000/'
+Api.url = 'https://api.ifixstore.ru/'
 
 Api.init = async (token) => {
     try {
