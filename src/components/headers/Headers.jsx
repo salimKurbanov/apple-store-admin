@@ -8,7 +8,7 @@ const Headers = () => {
 
     const [title, setTitle] = useState('Главная')
     const [id, setId] = useState(0)
-    const [input, setInput] = useState()
+    const [input, setInput] = useState(1)
 
     Store.useListener('title', setTitle)
 
@@ -29,12 +29,16 @@ const Headers = () => {
 
     const onSubmit = async (e) => {
         e.preventDefault()
-        let req = await Api.put({value: input * 100}, `api/course/update/${id}`)
+        let body = {
+            value: input * 100
+        }
+        let req = await Api.put(body, `api/course/update/${id}`)
 
         if(req !== 'error') {
-            return Notice.Send({type: 'success', text: 'Курс успешно обновлён'})
+            Store.setListener('notice', {type: 'success', text: req.message})
+            return
         } else {
-            return Notice.Send({type: 'error', text: 'Ошибка, попробуйте ещё раз'})
+            return
         }
     }
 
