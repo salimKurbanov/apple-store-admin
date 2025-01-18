@@ -35,6 +35,7 @@ const Headers = () => {
         let req = await Api.put(body, `api/course/update/${id}`)
 
         if(req !== 'error') {
+            Store.setListener('notice', {type: 'success', text: req.message})
             return
         } else {
             return
