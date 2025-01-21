@@ -18,7 +18,7 @@ export default function useColorPicker (keys) {
 
     useEffect(() => {
         if(isOpen) {
-            const image = 'images/color_picker.svg'
+            const image = '/color_picker.svg'
 
             initCnavasImage(canvasRef, canvasWidth, image, canvasHeight)
 
@@ -105,7 +105,7 @@ export default function useColorPicker (keys) {
 
     const pipietteFunction = (e) => {
         e.stopPropagation()
-        document.body.style.setProperty('cursor', 'url("/images/icons/pipette.svg"), auto', 'important')
+        document.body.style.setProperty('cursor', 'url("/pipette.svg"), auto', 'important')
         Store.setListener(keys.able_pipette, true)
     }
 
